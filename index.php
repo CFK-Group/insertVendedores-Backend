@@ -1,2 +1,2 @@
 <?php
-header('Location: /insertvendedor/web/sites/login');
+header('Location: /web/sites/login');
