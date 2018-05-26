@@ -1,0 +1,13 @@
+﻿FECHA_REGISTRO;VENDEDOR_CODIGO;CLIENTE_RUT;CANAL;ESTADO_RENDICION;FECHA_VISADO;ESTADO_VISACION;NO_VISADO;MOTIVOS_EN_REGULARIZACION;MOTIVOS_RECHAZO_VISADO;OBSERVACIONES_VISADO;CAMBIO_CODIGO;SERVICIO
+03-03-2017;GCORTM;16637468-5;DEALER TERRENO;RENDICION EN PLAZO;2017-03-10;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda  -  Inconsistencia datos cliente entre contrato y sistema (Nombre, Di;;en folio figura 1 D-Box Adicional y en tango 2 D-Box adicionales;NO;9
+04-03-2017;MISALG;11926094-9;DEALER TERRENO;RENDICION EN PLAZO;2017-03-10;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;3
+04-03-2017;DMOSCR;22495880-3;DEALER TERRENO;RENDICION EN PLAZO;2017-03-10;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda  -  Inconsistencia datos cliente entre contrato y sistema (Nombre, Di;;en folio no refleja prom.$11.000x6;NO;4
+01-03-2017;MLEAES;17627415-8;DEALER TERRENO;RENDICION EN PLAZO;2017-03-10;En Plazo Regularización;En Regularización;  -  Respaldo incompleto, ilegible, no corresponde o inconsistente;;direccion de ctto de arriendo no coorresponde a tango y cto vtr;NO;4
+01-03-2017;JHECAR;14157753-0;DEALER TERRENO;RENDICION EN PLAZO;2017-03-10;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;1
+03-03-2017;FERGAC;12689422-8;DEALER TERRENO;RENDICION EN PLAZO;2017-03-10;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;5
+03-03-2017;CGARPI;25439888-8;DEALER TERRENO;RENDICION EN PLAZO;2017-03-10;En Plazo Regularización;En Regularización;  -  Sin fotocopia documentación Diplomáticos/Extranjeros;;adjuntar imagen CI y respaldos de permanencia en el pais;NO;1
+01-03-2017;KCHERO;13558281-6;DEALER TERRENO;RENDICION EN PLAZO;2017-03-10;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;1
+03-03-2017;ASALGA;76553192-6;DEALER TERRENO;RENDICION EN PLAZO;2017-03-10;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;1
+02-03-2017;ASALGA;12323453-7;DEALER TERRENO;RENDICION EN PLAZO;2017-03-10;En Plazo Regularización;En Regularización;  -  Respaldo incompleto, ilegible, no corresponde o inconsistente;;ctto vtr y tango indica cordillera 98,ctto de arriendo figura cordillera 2348;NO;1
+01-03-2017;LCALVA;12622339-0;DEALER TERRENO;RENDICION EN PLAZO;2017-03-10;En Plazo Regularización;En Regularización;  -  Grupo Tarifario/Lista de precio Incorrectos o no asignados   -  Convenio sin validación/Sin respaldo de convenio/ Sin categoria;;"grupo tarifario incorrecto.
+validar convenio";NO;3

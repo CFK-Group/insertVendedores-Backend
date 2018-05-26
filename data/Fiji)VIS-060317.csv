@@ -1,0 +1,20 @@
+﻿FECHA_REGISTRO;VENDEDOR_CODIGO;CLIENTE_RUT;CANAL;ESTADO_RENDICION;FECHA_VISADO;ESTADO_VISACION;NO_VISADO;MOTIVOS_EN_REGULARIZACION;MOTIVOS_RECHAZO_VISADO;OBSERVACIONES_VISADO;CAMBIO_CODIGO;SERVICIO
+20-02-2017;MHORME;7937627-2;DEALER TERRENO;RENDICION EN PLAZO;2017-03-01;En Plazo Regularización;En Regularización;  -  Costo Incorp. Premium, SVA y o Promoción, mal cargada o no ingres;;falta promocion 11x6 meses;NO;4
+17-02-2017;VILSAM;5575030-0;DEALER TERRENO;RENDICION EN PLAZO;2017-03-01;En Plazo Regularización;En Regularización;  -  Inconsistencia de folio entre sistema y contrato;;Folio fisico: 5323104 folio que solicita tango 5323103, se debe enviar folio que solicita tango;NO;6
+19-02-2017;PGUZAQ;13037513-8;DEALER TERRENO;RENDICION EN PLAZO;2017-03-01;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;1
+23-02-2017;SVEGCM;23692002-K;DEALER TERRENO;RENDICION EN PLAZO;2017-03-02;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;3
+16-02-2017;ALARPO;15661257-K;DEALER TERRENO;RENDICION EN PLAZO;2017-02-28;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;4
+20-02-2017;RCONAL;18991412-1;DEALER TERRENO;RENDICION EN PLAZO;2017-03-01;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;1
+16-02-2017;RPAVAR;15356253-9;DEALER TERRENO;RENDICION EN PLAZO;2017-03-01;En Plazo Regularización;En Regularización;  -  Costo Incorp. Premium, SVA y o Promoción, mal cargada o no ingres;;Falta costo de instalacion en sistema;NO;1
+18-02-2017;CALVRE;17781044-4;DEALER TERRENO;RENDICION EN PLAZO;2017-03-01;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;4
+13-02-2017;ASALGA;12907064-1;DEALER TERRENO;RENDICION EN PLAZO;2017-03-02;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;2
+17-02-2017;RCONAL;6288192-5;DEALER TERRENO;RENDICION EN PLAZO;2017-03-01;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;5
+17-02-2017;JHECAR;6898239-1;DEALER TERRENO;RENDICION EN PLAZO;2017-03-01;En Plazo Regularización;En Regularización;  -  Costo Incorp. Premium, SVA y o Promoción, mal cargada o no ingres  -  Falta precio y/o producto en contrato o viene enmendado;;En ctto vtr y sistema falta costo de instalacion de $5000;NO;1
+18-02-2017;JBOLMO;25347345-2;DEALER TERRENO;RENDICION EN PLAZO;2017-03-01;En Plazo Regularización;En Regularización;  -  Sin fotocopia documentación Diplomáticos/Extranjeros;;adjuntar ctto de trabajo notarial;NO;4
+19-02-2017;FROSPE;19925310-7;DEALER TERRENO;RENDICION EN PLAZO;2017-03-02;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;Adjuntar respaldo de deuda.;NO;7
+21-02-2017;DMOSCR;9982941-9;DEALER TERRENO;RENDICION EN PLAZO;2017-03-01;En Plazo Regularización;En Regularización;  -  Costo Incorp. Premium, SVA y o Promoción, mal cargada o no ingres;;"en sistema falta valor promo 11x6
+";NO;4
+20-02-2017;EFREFR;7207633-8;DEALER TERRENO;RENDICION EN PLAZO;2017-03-01;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;4
+17-02-2017;MHORME;9922058-9;DEALER TERRENO;RENDICION EN PLAZO;2017-03-01;En Plazo Regularización;En Regularización;  -  Falta precio y/o producto en contrato o viene enmendado;;ctto vtr falta 5.000 de instlacion;NO;1
+18-02-2017;EVERDO;18641671-6;DEALER TERRENO;RENDICION EN PLAZO;2017-02-28;En Plazo Regularización;En Regularización;  -  Costo Incorp. Premium, SVA y o Promoción, mal cargada o no ingres;;Costo inst $5000 no corresponde en Tango.;NO;4
+18-02-2017;LCALVA;10696710-5;DEALER TERRENO;RENDICION EN PLAZO;2017-03-02;En Plazo Regularización;En Regularización;  -  Costo Incorp. Premium, SVA y o Promoción, mal cargada o no ingres;;Falta descuento promocional $11000 x 6 en Tango.;NO;4

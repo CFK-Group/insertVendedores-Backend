@@ -1,0 +1,30 @@
+FECHA_REGISTRO;VENDEDOR_CODIGO;CLIENTE_RUT;CANAL;ESTADO_RENDICION;FECHA_VISADO;ESTADO_VISACION;NO_VISADO;MOTIVOS_EN_REGULARIZACION;MOTIVOS_RECHAZO_VISADO;OBSERVACIONES_VISADO;CAMBIO_CODIGO;SERVICIO
+22-03-2017;FSEPMO;16898357-3;DEALER TERRENO;RENDICION EN PLAZO;2017-03-27;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;3
+20-03-2017;WFUECA;25613792-5;DEALER TERRENO;RENDICION EN PLAZO;2017-03-27;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;1
+27-02-2017;MUNVEC;12854155-1;DEALER TERRENO;RENDICION EN PLAZO;2017-03-23;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;2
+10-03-2017;CSANVI;22675703-1;DEALER TERRENO;RENDICION EN PLAZO;2017-03-27;En Plazo Regularización;En Regularización;  -  Respaldo incompleto, ilegible, no corresponde o inconsistente;;Ctto arriendo sin firma notarial y timbre inconsistente.;NO;1
+06-03-2017;MISALG;23018261-2;DEALER TERRENO;RENDICION EN PLAZO;2017-03-23;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;4
+20-03-2017;WFUECA;25010950-4;DEALER TERRENO;RENDICION EN PLAZO;2017-03-27;En Plazo Regularización;En Regularización;  -  Sin fotocopia documentación Diplomáticos/Extranjeros;;c.i no vigente,adjuntar ctto de trabajo notarial;NO;3
+16-03-2017;YORIOR;17305945-0;DEALER TERRENO;RENDICION EN PLAZO;2017-03-23;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;6
+18-03-2017;MMORGL;18048352-7;DEALER TERRENO;RENDICION EN PLAZO;2017-03-27;En Plazo Regularización;En Regularización;  -  Inconsistencia datos cliente entre contrato y sistema (Nombre, Di;;En ctto. vtr falta costo de inst. por $5.000 tal como lo indica tango.;NO;1
+20-03-2017;MLEAES;19201959-1;DEALER TERRENO;RENDICION EN PLAZO;2017-03-25;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;1
+20-03-2017;FAQUGO;13939918-8;DEALER TERRENO;RENDICION EN PLAZO;2017-03-27;En Plazo Regularización;En Regularización;  -  Inconsistencia de folio entre sistema y contrato;;Se ingresa folio en administradorde Tango, indica anulado.;NO;5
+20-03-2017;MMORGL;18556361-8;DEALER TERRENO;RENDICION EN PLAZO;2017-03-27;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;5
+17-03-2017;GCORTM;11768230-7;DEALER TERRENO;RENDICION EN PLAZO;2017-03-25;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda  -  Convenio sin validación/Sin respaldo de convenio/ Sin categoria;;convenio carabineros;NO;4
+01-03-2017;AREGAJ;76417014-8;DEALER TERRENO;RENDICION EN PLAZO;2017-03-23;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda  -  Sin documentación empresa/documentación incompleta;;serie A012365354 no vigente RRLL y deuda en rut. Rut de la otra socia OK. no adjunta Rol Tributario;NO;4
+13-03-2017;AARLOP;17182192-4;DEALER TERRENO;RENDICION EN PLAZO;2017-03-25;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;3
+18-03-2017;VENGAS;16718948-2;DEALER TERRENO;RENDICION EN PLAZO;2017-03-27;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;5
+03-03-2017;RAMLAC;17499778-0;DEALER TERRENO;RENDICION EN PLAZO;2017-03-23;En Plazo Regularización;En Regularización;  -  Convenio sin validación/Sin respaldo de convenio/ Sin categoria;;validar convenio;NO;1
+05-03-2017;LRAMQU;16408704-2;DEALER TERRENO;RENDICION EN PLAZO;2017-03-23;En Plazo Regularización;En Regularización;  -  Costo Incorp. Premium, SVA y o Promoción, mal cargada o no ingres;;Costo de instalacion cargado 2 veces;NO;6
+16-03-2017;WFUECA;17483801-1;DEALER TERRENO;RENDICION EN PLAZO;2017-03-27;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;Adjuntar respaldo de deuda.;REVERSADO;1
+06-03-2017;LRAMQU;25365983-1;DEALER TERRENO;RENDICION EN PLAZO;2017-03-23;En Plazo Regularización;En Regularización;  -  Sin fotocopia documentación Diplomáticos/Extranjeros;;cliente extranjero sin doc para validar permanencia en el pais;NO;5
+04-03-2017;SSOTLL;18095517-8;DEALER TERRENO;RENDICION EN PLAZO;2017-03-23;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;1
+21-03-2017;JHECAR;18270173-4;DEALER TERRENO;RENDICION EN PLAZO;2017-03-27;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda  -  Costo Incorp. Premium, SVA y o Promoción, mal cargada o no ingres;;Debe cargar costo de inst. por $5.000 en tango;NO;1
+11-03-2017;RGONCR;25616393-4;DEALER TERRENO;RENDICION EN PLAZO;2017-03-25;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;1
+20-03-2017;FLZASL;11739766-1;DEALER TERRENO;RENDICION EN PLAZO;2017-03-27;En Plazo Regularización;En Regularización;  -  Respaldo incompleto, ilegible, no corresponde o inconsistente;;Timbre inconsistente.;NO;1
+23-03-2017;CALVRE;16381615-6;DEALER TERRENO;RENDICION EN PLAZO;2017-03-25;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;6
+20-03-2017;CLOMOY;22443948-2;DEALER TERRENO;RENDICION EN PLAZO;2017-03-27;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;5
+20-03-2017;MUNVEC;13999816-2;DEALER TERRENO;RENDICION EN PLAZO;2017-03-27;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;4
+14-03-2017;HERARJ;16725561-2;DEALER TERRENO;RENDICION EN PLAZO;2017-03-25;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;4
+17-03-2017;KCHERO;10194589-8;DEALER TERRENO;RENDICION EN PLAZO;;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda  -  Inconsistencia datos cliente entre contrato y sistema (Nombre, Di;;En ctto vtr falta promo 11x6 meses//Sin respaldo deuda;NO;4
+16-03-2017;GCORTM;12889815-8;DEALER TERRENO;RENDICION EN PLAZO;;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;Adjuntar respaldo de deuda.;REVERSADO;5

@@ -1,0 +1,21 @@
+FECHA_REGISTRO;VENDEDOR_CODIGO;CLIENTE_RUT;CANAL;ESTADO_RENDICION;FECHA_VISADO;ESTADO_VISACION;NO_VISADO;MOTIVOS_EN_REGULARIZACION;MOTIVOS_RECHAZO_VISADO;OBSERVACIONES_VISADO;CAMBIO_CODIGO;SERVICIO
+14-03-2017;WFUECA;25103730-2;DEALER TERRENO;RENDICION EN PLAZO;21-03-2017;En Plazo Regularizacion;En Regularizacion;  -  Respaldo incompleto, ilegible, no corresponde o inconsistente;;Ctto. de arriendo ilegible, debe adjuntar respaldo completo para su revision.;NO;2
+24-02-2017;LLEIMO;17340969-9;DEALER TERRENO;RENDICION EN PLAZO;22-03-2017;En Plazo Regularizacion;En Regularizacion;  -  Sin respaldo deuda;;;NO;5
+27-02-2017;MUNVEC;12854155-1;DEALER TERRENO;RENDICION EN PLAZO;23-03-2017;En Plazo Regularizacion;En Regularizacion;  -  Sin respaldo deuda;;;NO;2
+06-03-2017;MISALG;23018261-2;DEALER TERRENO;RENDICION EN PLAZO;23-03-2017;En Plazo Regularizacion;En Regularizacion;  -  Sin respaldo deuda;;;NO;4
+11-03-2017;JHECAR;7089001-1;DEALER TERRENO;RENDICION EN PLAZO;21-03-2017;En Plazo Regularizacion;En Regularizacion;  -  Sin respaldo deuda;;;NO;5
+16-03-2017;YORIOR;17305945-0;DEALER TERRENO;RENDICION EN PLAZO;23-03-2017;En Plazo Regularizacion;En Regularizacion;  -  Sin respaldo deuda;;;NO;6
+07-03-2017;RSALSA;15315867-3;DEALER TERRENO;RENDICION EN PLAZO;21-03-2017;En Plazo Regularizacion;En Regularizacion;  -  Sin respaldo deuda;;;NO;3
+28-02-2017;AARLOP;15960121-8;DEALER TERRENO;RENDICION EN PLAZO;22-03-2017;En Plazo Regularizacion;En Regularizacion;  -  Sin respaldo deuda;;;NO;1
+13-03-2017;MACRIV;24954289-K;DEALER TERRENO;RENDICION EN PLAZO;21-03-2017;En Plazo Regularizacion;En Regularizacion;  -  Sin fotocopia documentación Diplomáticos/Extranjeros;;Visa temporaria. Adjuntar ctto trabajo firmado ante notario.;NO;1
+01-03-2017;AREGAJ;76417014-8;DEALER TERRENO;RENDICION EN PLAZO;23-03-2017;En Plazo Regularizacion;En Regularizacion;  -  Sin respaldo deuda  -  Sin documentación empresa/documentación incompleta;;serie A012365354 no vigente RRLL y deuda en rut. Rut de la otra socia OK. no adjunta Rol Tributario;NO;4
+05-03-2017;LRAMQU;16408704-2;DEALER TERRENO;RENDICION EN PLAZO;23-03-2017;En Plazo Regularizacion;En Regularizacion;  -  Costo Incorp. Premium, SVA y o Promoción, mal cargada o no ingres;;Costo de instalacion cargado 2 veces;NO;6
+06-03-2017;LRAMQU;25365983-1;DEALER TERRENO;RENDICION EN PLAZO;23-03-2017;En Plazo Regularizacion;En Regularizacion;  -  Sin fotocopia documentación Diplomáticos/Extranjeros;;cliente extranjero sin doc para validar permanencia en el pais;NO;5
+14-03-2017;LRAMQU;14170978-K;DEALER TERRENO;RENDICION EN PLAZO;21-03-2017;En Plazo Regularizacion;En Regularizacion;  -  Costo Incorp. Premium, SVA y o Promoción, mal cargada o no ingres;;"en sistema no corresponde cobro hab. Dbox $20.000
+";NO;3
+16-03-2017;MORCAL;19189115-5;DEALER TERRENO;RENDICION EN PLAZO;22-03-2017;En Plazo Regularizacion;En Regularizacion;  -  Costo Incorp. Premium, SVA y o Promoción, mal cargada o no ingres;;en sistema falta promo 11x6 paquetiza de 1 a 3;NO;3
+04-03-2017;SSOTLL;18095517-8;DEALER TERRENO;RENDICION EN PLAZO;23-03-2017;En Plazo Regularizacion;En Regularizacion;  -  Sin respaldo deuda;;;NO;1
+27-02-2017;ROMSAI;14140562-4;DEALER TERRENO;RENDICION EN PLAZO;21-03-2017;En Plazo Regularizacion;En Regularizacion;  -  Sin respaldo deuda;;;NO;1
+14-03-2017;FERGAC;16548423-1;DEALER TERRENO;RENDICION EN PLAZO;21-03-2017;En Plazo Regularizacion;En Regularizacion;  -  Sin respaldo deuda;;;NO;5
+16-03-2017;WRODDR;10632336-4;DEALER TERRENO;RENDICION EN PLAZO;22-03-2017;En Plazo Regularizacion;En Regularizacion;  -  Sin respaldo deuda;;;NO;1
+03-03-2017;RAMLAC;17499778-0;DEALER TERRENO;RENDICION EN PLAZO;23-03-2017;En Plazo Regularizacion;En Regularizacion;  -  Convenio sin validación/Sin respaldo de convenio/ Sin categoria;;validar convenio;NO;1

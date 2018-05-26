@@ -1,0 +1,16 @@
+﻿FECHA_REGISTRO;VENDEDOR_CODIGO;CLIENTE_RUT;CANAL;Equipo;ESTADO_RENDICION;FECHA_VISADO;ESTADO_VISACION;NO_VISADO;MOTIVOS_EN_REGULARIZACION;MOTIVOS_RECHAZO_VISADO;OBSERVACIONES_VISADO;CAMBIO_CODIGO;SERVICIO;INSERT
+10-02-2017;MISALG;25628644-0;DEALER TERRENO;KSEPGO;RENDICION EN PLAZO;2017-02-21;En Plazo Regularización;En Regularización;  -  Sin fotocopia documentación Diplomáticos/Extranjeros  -  Respaldo incompleto, ilegible, no corresponde o inconsistente;;"cazabobos pendiente
+Ctto de trabajo no indica indefinido";NO;3;Pendiente
+13-02-2017;MVIDPA;9596598-9;DEALER TERRENO;HHURTO;RENDICION EN PLAZO;2017-02-21;En Plazo Regularización;En Regularización;  -  Falta precio y/o producto en contrato o viene enmendado;;Falta costo de instalacion $5.000 en folio ;NO;5;Pendiente
+13-02-2017;GROJNA;25225043-3;DEALER TERRENO;CGARSE;RENDICION EN PLAZO;2017-02-21;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;1;Pendiente
+11-02-2017;CONROJ;9094110-0;DEALER TERRENO;ATJSO;RENDICION EN PLAZO;2017-02-21;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;1;Pendiente
+03-02-2017;CSANVI;11870624-2;DEALER TERRENO;CSANVI;RENDICION EN PLAZO;2017-02-22;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;2;Pendiente
+04-02-2017;IMINRE;25614752-1;DEALER TERRENO;SBRISA;RENDICION EN PLAZO;2017-02-22;En Plazo Regularización;En Regularización;  -  Sin fotocopia documentación Diplomáticos/Extranjeros  -  Sin respaldo deuda;;"visa temporaria debe acreditar permanencia en el pais
+";NO;1;Pendiente
+13-02-2017;CORIAL;24847966-3;DEALER TERRENO;KSEPGO;RENDICION EN PLAZO;2017-02-21;En Plazo Regularización;En Regularización;  -  Sin fotocopia documentación Diplomáticos/Extranjeros  -  Costo Incorp. Premium, SVA y o Promoción, mal cargada o no ingres;;"en sistema falta costo de instalacion $5.000
+visa temporaria debe acreditar permanencia en el pais
+";NO;3;Pendiente
+10-02-2017;JBOLMO;25513510-4;DEALER TERRENO;SBRISA;RENDICION EN PLAZO;2017-02-21;En Plazo Regularización;En Regularización;  -  Sin fotocopia documentación Diplomáticos/Extranjeros;;;NO;4;Pendiente
+11-02-2017;MBOCAG;15707497-0;DEALER TERRENO;SBRISA;RENDICION EN PLAZO;2017-02-22;En Plazo Regularización;En Regularización;  -  Respaldo incompleto, ilegible, no corresponde o inconsistente;;Ctto de arriendo indica que inmueble arrendado corresponde a la dirección Monseñor Alejandro Huneus 7933. Además timbre notario ilegible;NO;1;Pendiente
+10-02-2017;FDELCA;24527352-5;DEALER TERRENO;MBUROA;RENDICION EN PLAZO;2017-02-21;En Plazo Regularización;En Regularización;  -  Sin fotocopia documentación Diplomáticos/Extranjeros;;Cliente extranjero con serie de C.I. no vigente, validar permanencia en el pais.;NO;3;Pendiente
+10-02-2017;FERGAC;15743866-2;DEALER TERRENO;KSEPGO;RENDICION EN PLAZO;2017-02-22;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;4;Pendiente

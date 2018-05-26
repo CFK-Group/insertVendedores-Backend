@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../checklist/.idea/checklist.iml" filepath="$PROJECT_DIR$/../checklist/.idea/checklist.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/insertVendedor.iml" filepath="$PROJECT_DIR$/.idea/insertVendedor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../inventarioLocal/.idea/inventarioLocal.iml" filepath="$PROJECT_DIR$/../inventarioLocal/.idea/inventarioLocal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../metrogas/.idea/metrogas.iml" filepath="$PROJECT_DIR$/../metrogas/.idea/metrogas.iml" />
+    </modules>
+  </component>
+</project>

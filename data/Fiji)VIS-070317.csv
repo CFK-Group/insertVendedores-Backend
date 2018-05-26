@@ -1,0 +1,37 @@
+﻿FECHA_REGISTRO;VENDEDOR_CODIGO;CLIENTE_RUT;CANAL;ESTADO_RENDICION;FECHA_VISADO;ESTADO_VISACION;NO_VISADO;MOTIVOS_EN_REGULARIZACION;MOTIVOS_RECHAZO_VISADO;OBSERVACIONES_VISADO;CAMBIO_CODIGO;SERVICIO
+22-02-2017;ASAGPA;17253908-4;DEALER TERRENO;RENDICION EN PLAZO;2017-03-03;En Plazo Regularización;En Regularización;  -  Costo Incorp. Premium, SVA y o Promoción, mal cargada o no ingres;;corresponde 5.000 de instlacion;NO;6
+23-02-2017;SVEGCM;23692002-K;DEALER TERRENO;RENDICION EN PLAZO;2017-03-02;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;3
+14-02-2017;MCOLHU;15779214-8;DEALER TERRENO;RENDICION EN PLAZO;2017-03-03;En Plazo Regularización;En Regularización;  -  Falta precio y/o producto en contrato o viene enmendado;;Falta promocion nacional $8.000 X6 en folio;NO;6
+23-02-2017;FGOMCO;9600536-9;DEALER TERRENO;RENDICION EN PLAZO;2017-03-03;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;1
+23-02-2017;YPAIRO;11857912-7;DEALER TERRENO;RENDICION EN PLAZO;2017-03-03;En Plazo Regularización;En Regularización;  -  Inconsistencia datos cliente entre contrato y sistema (Nombre, Di;;"Costo de instalacion en folio no corresponde
+falta promocion $11.000 X6 en folio";NO;4
+23-02-2017;WRODDR;14107001-0;DEALER TERRENO;RENDICION EN PLAZO;2017-03-03;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;1
+18-02-2017;ARAPEM;18706975-0;DEALER TERRENO;RENDICION EN PLAZO;2017-03-03;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;1
+20-02-2017;DLARPO;19645797-6;DEALER TERRENO;RENDICION EN PLAZO;2017-03-03;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;1
+24-02-2017;ASALGA;9614949-2;DEALER TERRENO;RENDICION EN PLAZO;2017-03-03;En Plazo Regularización;En Regularización;  -  Costo Incorp. Premium, SVA y o Promoción, mal cargada o no ingres;;Cobro rx no corresponde;NO;6
+19-02-2017;FROSPE;19925310-7;DEALER TERRENO;RENDICION EN PLAZO;2017-03-02;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;Adjuntar respaldo de deuda.;NO;7
+24-02-2017;MBOCAG;11163220-0;DEALER TERRENO;RENDICION EN PLAZO;2017-03-03;En Plazo Regularización;En Regularización;  -  Convenio sin validación/Sin respaldo de convenio/ Sin categoria;;Convenio s/validacion;NO;5
+18-02-2017;AREGAJ;6463839-4;DEALER TERRENO;RENDICION EN PLAZO;2017-03-03;En Plazo Regularización;En Regularización;  -  Costo Incorp. Premium, SVA y o Promoción, mal cargada o no ingres;;"falta cargar promocion $11.000 x6
+Cobro de instalacion no corresponde";NO;6
+22-02-2017;JMORGA;24294249-3;DEALER TERRENO;RENDICION EN PLAZO;2017-03-03;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;3
+22-02-2017;PCURME;76694112-5;DEALER TERRENO;RENDICION EN PLAZO;2017-03-03;En Plazo Regularización;En Regularización;  -  Inconsistencia datos cliente entre contrato y sistema (Nombre, Di;;En ctto vtr no corresponde costo de instalacion;NO;4
+14-02-2017;RCONAL;18335570-8;DEALER TERRENO;RENDICION EN PLAZO;2017-03-03;En Plazo Regularización;En Regularización;  -  Costo Incorp. Premium, SVA y o Promoción, mal cargada o no ingres;;Falta costo de  instalacion de $5000 en tango;NO;3
+24-02-2017;CORIAL;76283305-0;DEALER TERRENO;RENDICION EN PLAZO;2017-03-03;En Plazo Regularización;En Regularización;  -  Grupo Tarifario/Lista de precio Incorrectos o no asignados ;;Se debe modificar los valores y LP a negocios// falta promo nacional en tango;NO;4
+13-02-2017;SPARLL;17232414-2;DEALER TERRENO;RENDICION EN PLAZO;2017-03-03;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda  -  Costo Incorp. Premium, SVA y o Promoción, mal cargada o no ingres  -  Falta precio y/o producto en contrato o viene enmendado;;No corresponde promocion de $5.000x6 ya que cliente paquetiza y debe cargar doble costo de inst. en tango y en folio ;NO;2
+14-02-2017;FERGAC;16051965-7;DEALER TERRENO;RENDICION EN PLAZO;;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;2
+24-02-2017;RCONAL;17414062-6;DEALER TERRENO;RENDICION EN PLAZO;;En Plazo Regularización;En Regularización;  -  Sin respaldo deuda;;;NO;1
+;;;;;;;;;;;;
+;;;;;;;;;;;;
+;;;;;;;;;;;;
+;;;;;;;;;;;;
+;;;;;;;;;;;;
+;;;;;;;;;;;;
+;;;;;;;;;;;;
+;;;;;;;;;;;;
+;;;;;;;;;;;;
+;;;;;;;;;;;;
+;;;;;;;;;;;;
+;;;;;;;;;;;;
+;;;;;;;;;;;;
+;;;;;;;;;;;;
+;;;;;;;;;;;;
