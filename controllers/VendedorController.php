@@ -120,6 +120,28 @@ class VendedorController extends \yii\rest\ActiveController
 		}
 		return null;
 	}
+
+    public function actionAddaccioncomercial2(){
+        header('Access-Control-Request-Methods: POST, GET, OPTIONS');
+        header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept');
+        if ($_SERVER['REQUEST_METHOD']=='POST'){
+            $request_body = file_get_contents('php://input');
+            $obj = json_decode($request_body, TRUE);
+            $token = $obj["token"];
+            $idProspecto = $obj["idProspecto"];
+            $accion = $obj["accionComercial"];
+            $prospecto = Prospecto::findOne(["id"=>$idProspecto]);
+            if( $prospecto != null ){
+                $accionComercial = new AccionComercial();
+                $accionComercial->accion = $accion;
+                $accionComercial->id_prospecto = $prospecto->id;
+                $accionComercial->timestamp = time();
+                $accionComercial->insert();
+                return $accionComercial;
+            }
+        }
+        return null;
+    }
 	
 	public function actionCreateprospecto(){
 
@@ -150,7 +172,41 @@ class VendedorController extends \yii\rest\ActiveController
 		
 		return $prospecto;
 	}
-	
+
+    public function actionCreateprospecto2(){
+        header('Access-Control-Request-Methods: POST, GET, OPTIONS');
+        header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept');
+        if ($_SERVER['REQUEST_METHOD']=='POST') {
+            $request_body = file_get_contents('php://input');
+            $obj = json_decode($request_body, TRUE);
+
+
+            $token = $obj["token"];
+            $vendedor = Vendedor::getBySessionToken($token);
+            $newProspecto = $obj["prospecto"];
+            $accion = $obj["accionComercial"];
+
+            $newProspecto["tipo_creacion"] = Prospecto::CREACION_USER;
+            $newProspecto["id_vendedor"] = $vendedor->id;
+
+            $prospecto = new Prospecto();
+            $prospecto->updateAttributes($newProspecto);
+            $prospecto->update_time = time();
+            $prospecto->create_time = time();
+            $prospecto->save(0);
+
+            $accionComercial = new AccionComercial();
+            $accionComercial->accion = $accion;
+            $accionComercial->id_prospecto = $prospecto->id;
+            $accionComercial->timestamp = time();
+            $accionComercial->insert(1);
+
+            $prospecto->accion_comercial = $prospecto->getAccionesComerciales();
+            return $prospecto;
+        }
+        return null;
+    }
+
 	public function actionUpdateprospecto(){
 		$request = \Yii::$app->request;
 		
@@ -175,7 +231,36 @@ class VendedorController extends \yii\rest\ActiveController
 		$prospectoBD->accion_comercial = $prospectoBD->getAccionesComerciales();
 		return $prospectoBD;
 	}
-	
+
+    public function actionUpdateprospecto2(){
+        header('Access-Control-Request-Methods: POST, GET, OPTIONS');
+        header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept');
+        if ($_SERVER['REQUEST_METHOD']=='POST') {
+            $request_body = file_get_contents('php://input');
+            $object = json_decode($request_body, TRUE);
+            $token = $object["token"];
+            $prospecto = $object["prospecto"];
+
+            $idProspecto = $prospecto["id"];
+            $prospectoBD = Prospecto::findOne(["id"=> $idProspecto]);
+            $prospectoBD->updateAttributes($prospecto);
+            $prospectoBD->update_time = time();
+            $prospectoBD->save();
+
+            if(isset($object["accionComercial"]) && $object["accionComercial"] != null ){
+                $accion = $object["accionComercial"];
+                $accionComercial = new AccionComercial();
+                $accionComercial->accion = $accion;
+                $accionComercial->id_prospecto = $prospectoBD->id;
+                $accionComercial->timestamp = time();
+                $accionComercial->insert(1);
+            }
+            $prospectoBD->accion_comercial = $prospectoBD->getAccionesComerciales();
+            return $prospectoBD;
+        }
+        return null;
+    }
+
 	public function actionChangeaction(){
 		$request = \Yii::$app->request;
 		$post = $request->post();
@@ -190,6 +275,28 @@ class VendedorController extends \yii\rest\ActiveController
 		$prospecto->save(0);
 		return $prospecto;
 	}
+
+    public function actionChangeaction2(){
+        header('Access-Control-Request-Methods: POST, GET, OPTIONS');
+        header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept');
+        if ($_SERVER['REQUEST_METHOD']=='POST') {
+            $request_body = file_get_contents('php://input');
+            $post = json_decode($request_body, TRUE);
+
+
+            $idProspecto = $post["idProspecto"];
+            $token = $post["token"];
+            $tipoContacto = $post["tipo_contacto"];
+            $tipoAccion = $post["tipo_accion"];
+            $prospecto = Prospecto::findOne(["id" => $idProspecto]);
+            $prospecto->tipo_contacto = $tipoContacto;
+            $prospecto->tipo_accion = $tipoAccion;
+            $prospecto->update_time = time();
+            $prospecto->save(0);
+            return $prospecto;
+        }
+        return null;
+    }
 	
 	public function actionCreateuser(){
 		$request = \Yii::$app->request;
@@ -265,7 +372,7 @@ class VendedorController extends \yii\rest\ActiveController
 		return $prospectos;
 	}
 	
-	public function actionLogin(d$username, $pass, $deviceId, $deviceModel){
+	public function actionLogin($username, $pass, $deviceId, $deviceModel){
 		
 		Utils::log("Buscando usuario con username:" . $username);
 		$vendedor = Vendedor::findOne(["username" => $username]);		
@@ -286,6 +393,10 @@ class VendedorController extends \yii\rest\ActiveController
                         return new SessionData(SessionData::WRONG_DEVICE, "WRONG DEVICE", "");
                     }
                 }
+            }
+
+            if($vendedor->estado !== 0){
+                return new SessionData(SessionData::NO_AUTH, "ACCESO NO AUTORIZADO", "");
             }
 
             session_start();
