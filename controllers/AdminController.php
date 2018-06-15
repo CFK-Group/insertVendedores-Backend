@@ -42,7 +42,9 @@ class AdminController extends Controller
     //LECTURA DE CSV SUBIDO SIN GUARDAR
     function readCSV($csvFile)
     {
-        $file_handle = fopen($csvFile, 'r');
+        var_dump($_FILES);
+        var_dump($csvFile);
+        /*$file_handle = fopen($csvFile, 'r');
         $line_of_text = [];
         while (!feof($file_handle)) {
             $read = fgetcsv($file_handle, 1024, ';');
@@ -57,7 +59,7 @@ class AdminController extends Controller
             $line_of_text[] = $helper;
         }
         fclose($file_handle);
-        return $line_of_text;
+        return $line_of_text;*/
     }
 
     //FUNCION DE CARGA DE LA BASE DE DESCONEXIONES
@@ -292,9 +294,9 @@ class AdminController extends Controller
         //de las ventas en la bd, hay alguna que no venga en el excel?
         //¿Cual es el periodo de tiempo que viene en las bases de venta descargadas del portal?
         //Si es solo un mes, perfect!
-       //var_dump("Estas existen en el excel");
-       //var_dump(count($poolBids));
-       //var_dump($poolBids);
+        //var_dump("Estas existen en el excel");
+        //var_dump(count($poolBids));
+        //var_dump($poolBids);
 
         $ventasPerdidasId = array_diff($poolAids, $poolBids);
         //Cambiar comisable a NO para cada una de esas ventas
@@ -312,6 +314,8 @@ class AdminController extends Controller
        //var_dump($counterPerdidas);
         return ['counterNews' => $counterNews, 'error' => $error, 'counterUpdate' => $counterUpdate, 'counterPerdidas' => $counterPerdidas];
     }
+
+
     //FUNCION DE CARGA DE LA BASE DE COBRANZA
     //OK
     function loadCobranza($lines)
@@ -1031,6 +1035,7 @@ class AdminController extends Controller
                 //usamos la funcion para leer csv que nos entregará un arreglo por cada linea, con los
                 //campos en utf-8
                 $lines = $this->readCSV($_FILES['cvs']['tmp_name']);
+                $lines = [];
                 $lines = array_filter($lines);
 
                 if (count($lines) > 0) {
