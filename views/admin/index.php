@@ -34,10 +34,11 @@ $series = $series . "]";
                     <form role="form" class="form-inline">
                         <label for="range">Periodo de tiempo a mostrar para los cuadros</label>
                         <select class="form-control" name="range" id="range">
+                            <option value="">Sin Calcular</option>
                             <option value="1 week ago">1 Semana</option>
                             <option value="2 week ago">2 Semanas</option>
                             <option value="3 week ago">3 Semanas</option>
-                            <option value="first day of this month" selected>Mes Actual</option>
+                            <option value="first day of this month">Mes Actual</option>
                         </select>
                     </form>
                 </div>
@@ -50,9 +51,7 @@ $series = $series . "]";
 
                         <div class="info-box-content">
                             <span class="info-box-text info-box-text-small">Total direcciones cargadas</span>
-                            <span class="info-box-number" id="dirCargadas">
-                            <img src="img/spinner.gif" alt="loading..." class="spinner">
-                    </span>
+                            <span class="info-box-number" id="dirCargadas"> -- </span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
@@ -65,7 +64,7 @@ $series = $series . "]";
 
                         <div class="info-box-content">
                             <span class="info-box-text info-box-text-small">Total direcciones con accion comercial</span>
-                            <span class="info-box-number" id="dirAccionComercial"><img src="img/spinner.gif" alt="loading..." class="spinner"></span>
+                            <span class="info-box-number" id="dirAccionComercial"> -- </span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
@@ -78,7 +77,7 @@ $series = $series . "]";
 
                         <div class="info-box-content">
                             <span class="info-box-text info-box-text-small">Total prospectos creados</span>
-                            <span class="info-box-number" id="prospectosCreados"><img src="img/spinner.gif" alt="loading..." class="spinner"></span>
+                            <span class="info-box-number" id="prospectosCreados"> -- </span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
@@ -94,7 +93,7 @@ $series = $series . "]";
 
                         <div class="info-box-content">
                             <span class="info-box-text info-box-text-small">Total ventas instaladas</span>
-                            <span class="info-box-number" id="vInstaladas"><img src="img/spinner.gif" alt="loading..." class="spinner"></span>
+                            <span class="info-box-number" id="vInstaladas"> -- </span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
@@ -107,7 +106,7 @@ $series = $series . "]";
 
                         <div class="info-box-content">
                             <span class="info-box-text info-box-text-small">Total ventas en INS</span>
-                            <span class="info-box-number" id="vINS"><img src="img/spinner.gif" alt="loading..." class="spinner"></span>
+                            <span class="info-box-number" id="vINS"> -- </span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
@@ -173,7 +172,7 @@ $series = $series . "]";
                         </tr>
                         <tr>
                             <td class="table-spinner" colspan="6">
-                                <img src="img/spinner.gif" alt="loading..." class="spinner" style="margin: 0 auto">
+                                Sin Calcular
                             </td>
                         </tr>
                     </table>
@@ -391,12 +390,16 @@ $this->registerJS("
     
     $('#range').change(function(){
         range = $(this).val()
-        getData(range);
-        $('.info-box-number').html('<img src=\"img/spinner.gif\" alt=\"loading...\" class=\"spinner\">');
-        $('#resumen').append('<td class=\"table-spinner\" colspan=\"6\"><img src=\"img/spinner.gif\" alt=\"loading...\" class=\"spinner\" style=\"margin: 0 auto\"></td>');    
-        $('.generated').remove();    
+        if (range != ''){
+            getData(range);
+            $('.info-box-number').html('<img src=\"img/spinner.gif\" alt=\"loading...\" class=\"spinner\">');
+            $('#resumen').append('<td class=\"table-spinner\" colspan=\"6\"><img src=\"img/spinner.gif\" alt=\"loading...\" class=\"spinner\" style=\"margin: 0 auto\"></td>');    
+            $('.generated').remove();
+        }else{
+            $('.info-box-number').html('--');
+            $('#resumen').append('<td class=\"table-spinner\" colspan=\"6\">Sin Calcular</td>');    
+            $('.generated').remove();
+        }
     })
-    
-    getData($('#range').val());
 ");
 
