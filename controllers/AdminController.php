@@ -10,6 +10,7 @@ use app\models\Prospecto;
 use app\models\SupervisorSupervisa;
 use app\models\Vendedor;
 use app\models\Venta;
+use app\models\UploadException;
 use app\models\VentaPerdida;
 use Yii;
 use yii\filters\AccessControl;
@@ -42,9 +43,7 @@ class AdminController extends Controller
     //LECTURA DE CSV SUBIDO SIN GUARDAR
     function readCSV($csvFile)
     {
-        var_dump($_FILES);
-        var_dump($csvFile);
-        /*$file_handle = fopen($csvFile, 'r');
+        $file_handle = fopen($csvFile, 'r');
         $line_of_text = [];
         while (!feof($file_handle)) {
             $read = fgetcsv($file_handle, 1024, ';');
@@ -59,7 +58,7 @@ class AdminController extends Controller
             $line_of_text[] = $helper;
         }
         fclose($file_handle);
-        return $line_of_text;*/
+        return $line_of_text;
     }
 
     //FUNCION DE CARGA DE LA BASE DE DESCONEXIONES
@@ -568,13 +567,16 @@ class AdminController extends Controller
                     //crear supervisor faltante
                     $modelSupervisor = new Vendedor();
                     $supervisor = $this->asignarModeloDotacion($modelSupervisor, $nuevas[$k]);
-                    $index[] = $nuevas[$k][0];
-                    if (!$supervisor->save()) {
-                        $error = $supervisor->getErrors();
-                        break;
-                    } else {
-                        $counterNews = $counterNews + 1;
+                    //si el codigo tango no viene, omitimos
+                    if ($supervisor->username !== '-' || $supervisor->username !== '' || $supervisor->username !== ' ' || !is_null($supervisor->username)) {
+                        $index[] = $nuevas[$k][0];
+                        if (!$supervisor->save()) {
+                            $error = $supervisor->getErrors();
+                            break;
+                        } else {
+                            $counterNews = $counterNews + 1;
 
+                        }
                     }
                 }
             }
@@ -613,22 +615,25 @@ class AdminController extends Controller
                     if (!in_array($nuevas[$k][0], $index)) {
                         $model2 = new Vendedor();
                         $modelSave = $this->asignarModeloDotacion($model2, $nuevas[$k]);
-                        if (!$modelSave->save()) {
-                            var_dump("Usuario nuevo");
-                            $error = $modelSave->getErrors();
-                            break;
-                        } else {
-                            $counterNews = $counterNews + 1;
-                            $vendedor = Vendedor::getByUsername($nuevas[$k][24]);
-                            if (!is_null($vendedor)) {
-                                $uploadSuper = $this->setSupervisor($modelSave->id, $vendedor->id);
-                                if (!$uploadSuper) {
+                        //si el codigo tango no viene, omitimos
+                        if ($supervisor->username !== '-' || $supervisor->username !== '' || $supervisor->username !== ' ' || !is_null($supervisor->username)) {
+                            if (!$modelSave->save()) {
+                                var_dump("Usuario nuevo");
+                                $error = $modelSave->getErrors();
+                                break;
+                            } else {
+                                $counterNews = $counterNews + 1;
+                                $vendedor = Vendedor::getByUsername($nuevas[$k][24]);
+                                if (!is_null($vendedor)) {
+                                    $uploadSuper = $this->setSupervisor($modelSave->id, $vendedor->id);
+                                    if (!$uploadSuper) {
+                                        $error[0][0] = "Problemas para vincular el supervisor al usuario " . $modelSave->username;
+                                        break;
+                                    }
+                                } else {
                                     $error[0][0] = "Problemas para vincular el supervisor al usuario " . $modelSave->username;
                                     break;
                                 }
-                            }else{
-                                $error[0][0] = "Problemas para vincular el supervisor al usuario " . $modelSave->username;
-                                break;
                             }
                         }
                     }
@@ -1027,6 +1032,7 @@ class AdminController extends Controller
         $counterPerdidas = 0;
         //var_dump($tipoBase);
         //verificamos si la variable $_FILES existe
+        try{
         if ((!empty($_FILES)) && isset($_FILES['cvs'])) {
             $fileChecker = 1;
             //si el archivo es csv continuamos, sino damos el error
@@ -1034,55 +1040,61 @@ class AdminController extends Controller
             if ($kaboom[count($kaboom)-1]== 'csv') {
                 //usamos la funcion para leer csv que nos entregará un arreglo por cada linea, con los
                 //campos en utf-8
-                $lines = $this->readCSV($_FILES['cvs']['tmp_name']);
-                $lines = [];
-                $lines = array_filter($lines);
+                if ($_FILES['cvs']['error'] === UPLOAD_ERR_OK) {
+                    $lines = $this->readCSV($_FILES['cvs']['tmp_name']);
+                    $lines = array_filter($lines);
 
-                if (count($lines) > 0) {
-                    switch ($_POST['tipo']) {
-                        case 1:
-                            $response = $this->loadVenta2($lines, $_POST['tipoBase']);
-                            $error = $response['error'];
-                            $counterNews = $response['counterNews'];
-                            $counterUpdate = $response['counterUpdate'];
-                            $counterPerdidas = $response['counterPerdidas'];
-                            break;
-                        case 2:
-                            $response = $this->loadCobranza($lines);
-                            $error = $response['error'];
-                            $counterNews = $response['counterNews'];
-                            $counterUpdate = $response['counterUpdate'];
-                            break;
-                        case 3:
-                            $response = $this->loadDx($lines);
-                            $error = $response['error'];
-                            $counterNews = $response['counterNews'];
-                            $counterUpdate = $response['counterUpdate'];
-                            break;
-                        /*case 4:
-                            $response = $this->loadApertura($lines);
-                            $error = $response['error'];
-                            $counterNews = $response['counterNews'];
-                            $counterUpdate = $response['counterUpdate'];
-                            break;*/
-                        case 5:
-                            $response = $this->loadDotacion($lines);
-                            $error = $response['error'];
-                            $counterNews = $response['counterNews'];
-                            $counterUpdate = $response['counterUpdate'];
-                            break;
-                        default:
-                            $error = [];
-                            $counter = 0;
-                            break;
+                    if (count($lines) > 0) {
+                        switch ($_POST['tipo']) {
+                            case 1:
+                                $response = $this->loadVenta2($lines, $_POST['tipoBase']);
+                                $error = $response['error'];
+                                $counterNews = $response['counterNews'];
+                                $counterUpdate = $response['counterUpdate'];
+                                $counterPerdidas = $response['counterPerdidas'];
+                                break;
+                            case 2:
+                                $response = $this->loadCobranza($lines);
+                                $error = $response['error'];
+                                $counterNews = $response['counterNews'];
+                                $counterUpdate = $response['counterUpdate'];
+                                break;
+                            case 3:
+                                $response = $this->loadDx($lines);
+                                $error = $response['error'];
+                                $counterNews = $response['counterNews'];
+                                $counterUpdate = $response['counterUpdate'];
+                                break;
+                            /*case 4:
+                                $response = $this->loadApertura($lines);
+                                $error = $response['error'];
+                                $counterNews = $response['counterNews'];
+                                $counterUpdate = $response['counterUpdate'];
+                                break;*/
+                            case 5:
+                                $response = $this->loadDotacion($lines);
+                                $error = $response['error'];
+                                $counterNews = $response['counterNews'];
+                                $counterUpdate = $response['counterUpdate'];
+                                break;
+                            default:
+                                $error = [];
+                                $counter = 0;
+                                break;
+                        }
+
+                    } else {
+                        $error[0][0] = "Archivo Vacio";
                     }
-
-                } else {
-                    $error[0][0] = "Archivo Vacio";
+                }else{
+                    throw new UploadException($_FILES['cvs']['error']);
                 }
             } else {
                 $error[0][0] = "Archivo Inválido";
             }
+        }
+        }catch(UploadException $e){
+            $error[0][0] = $e->getMessage();
         }
         return $this->render('uploadventas', array('error' => $error, 'counterNews' => $counterNews, 'counterUpdate' => $counterUpdate, 'fileChecker' => $fileChecker, 'counterPerdidas' => $counterPerdidas));
     }
