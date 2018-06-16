@@ -44,6 +44,9 @@ use Yii;
  */
 class Prospecto extends \yii\db\ActiveRecord
 {
+    const CREACION_USER=2;
+    const CREACION_WEB=1;
+
     /**
      * @inheritdoc
      */
