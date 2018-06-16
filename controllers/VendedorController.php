@@ -365,7 +365,7 @@ class VendedorController extends \yii\rest\ActiveController
 			$this->setHeader(400);
 			return false;
 		}
-		$prospectos = $user->getProspectos();
+		$prospectos = $user->getProspectos()->all();
 		return $prospectos;
 		if(count($prospectos)>0){
             foreach ($prospectos as $prospecto ){
