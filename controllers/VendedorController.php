@@ -366,10 +366,13 @@ class VendedorController extends \yii\rest\ActiveController
 			return false;
 		}
 		$prospectos = $user->getProspectos();
-		foreach ($prospectos as $prospecto ){
-			$prospecto->accion_comercial = $prospecto->getAccionesComerciales();
+		if(count($prospectos)>0){
+            foreach ($prospectos as $prospecto ){
+                $prospecto->accion_comercial = $prospecto->getAccionesComerciales();
+            }
+            return $prospectos;
 		}
-		return $prospectos;
+		return false;
 	}
 	
 	public function actionLogin($username, $pass, $deviceId, $deviceModel){
