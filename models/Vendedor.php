@@ -57,6 +57,8 @@ use app\commands\Utils;
  */
 class Vendedor extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
+    const TOKEN_ALIVE_TIME = 86400; // 1 dia
+
     /**
      * @inheritdoc
      */
