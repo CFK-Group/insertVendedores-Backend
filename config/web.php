@@ -74,6 +74,17 @@ $config = [
             				'GET getVentas' => 'getventas',
             				'GET getProspectos' => 'getprospectos',
                             'GET getVendedor' => 'getvendedor',
+                            'POST createUser2' => 'createuser2',
+                            'OPTIONS createUser2' => 'createuser2',
+                            'POST createProspecto2' => 'createprospecto2',
+                            'OPTIONS createProspecto2' => 'createprospecto2',
+                            'POST changeAction2' => 'changeaction2',
+                            'OPTIONS changeAction2' => 'changeaction2',
+                            'POST updateProspecto2' => 'updateprospecto2',
+                            'OPTIONS updateProspecto2' => 'updateprospecto2',
+                            'POST addAccionComercial2' => 'addaccioncomercial2',
+                            'OPTIONS addAccionComercial2' => 'addaccioncomercial2',
+
             		],
             	],
             	[
