@@ -373,7 +373,7 @@ class VendedorController extends \yii\rest\ActiveController
 	}
 	
 	public function actionLogin($username, $pass, $deviceId, $deviceModel){
-		
+		return null;
 		Utils::log("Buscando usuario con username:" . $username);
 		$vendedor = Vendedor::findOne(["username" => $username]);		
 		if($vendedor == null || count($vendedor) == 0){
@@ -387,7 +387,6 @@ class VendedorController extends \yii\rest\ActiveController
             } else {
                 // TODO HACK para usuario test
                 $supers = [3, 333, 334, 335, 336, 337, 339, 539, 538];
-                //if($vendedor->id !=3){
                 if (!(in_array($vendedor->id, $supers))) {
                     if ($deviceId == null || $deviceId == "" || $vendedor->device_id != $deviceId) {
                         return new SessionData(SessionData::WRONG_DEVICE, "WRONG DEVICE", "");
