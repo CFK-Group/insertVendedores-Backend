@@ -403,6 +403,7 @@ class VendedorController extends \yii\rest\ActiveController
             Utils::log("Session id:" . $vendedor->api_token);
             $vendedor->api_token_create_date = time();
             if(!$vendedor->save()){
+                return $vendedor;
                 return($vendedor->getErrors());
             }
             return new SessionData(SessionData::LOGIN_OK, "", $vendedor->api_token);
