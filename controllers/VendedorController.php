@@ -180,7 +180,6 @@ class VendedorController extends \yii\rest\ActiveController
             $request_body = file_get_contents('php://input');
             $obj = json_decode($request_body, TRUE);
 
-
             $token = $obj["token"];
             $vendedor = Vendedor::getBySessionToken($token);
             return(gettype($vendedor));
