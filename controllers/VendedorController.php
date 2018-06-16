@@ -373,7 +373,7 @@ class VendedorController extends \yii\rest\ActiveController
 	}
 	
 	public function actionLogin($username, $pass, $deviceId, $deviceModel){
-		return null;
+
 		Utils::log("Buscando usuario con username:" . $username);
 		$vendedor = Vendedor::findOne(["username" => $username]);		
 		if($vendedor == null || count($vendedor) == 0){
