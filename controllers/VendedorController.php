@@ -366,6 +366,7 @@ class VendedorController extends \yii\rest\ActiveController
 			return false;
 		}
 		$prospectos = $user->getProspectos();
+		return $prospectos;
 		if(count($prospectos)>0){
             foreach ($prospectos as $prospecto ){
                 $prospecto->accion_comercial = $prospecto->getAccionesComerciales();
