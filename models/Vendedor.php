@@ -74,8 +74,8 @@ class Vendedor extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
     {
         return [
             [['username'], 'required'],
-            [['fecha_ini_lic', 'fecha_ter_lic', 'hire_date', 'dismissal_date', 'tipo_usuario', 'api_token_create_date', 'dias_trabajados'], 'integer'],
-            [['username', 'zona', 'canal', 'codi_equipo', 'rut', 'nombre', 'apellido', 'rut_empresa', 'desc_empresa', 'estado', 'observacion', 'ciudad', 'territorios', 'telefono', 'smartflex'], 'string', 'max' => 45],
+            [['fecha_ini_lic', 'fecha_ter_lic', 'hire_date', 'dismissal_date', 'tipo_usuario', 'api_token_create_date', 'dias_trabajados', 'estado'], 'integer'],
+            [['username', 'zona', 'canal', 'codi_equipo', 'rut', 'nombre', 'apellido', 'rut_empresa', 'desc_empresa', 'observacion', 'ciudad', 'territorios', 'telefono', 'smartflex'], 'string', 'max' => 45],
             [['codi_pertenece', 'nuevo_equipo', 'jefaturas'], 'string', 'max' => 100],
             [['coordinadores', 'email'], 'string', 'max' => 200],
             [['desc_cargo'], 'string', 'max' => 50],
