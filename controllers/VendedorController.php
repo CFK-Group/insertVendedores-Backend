@@ -183,6 +183,7 @@ class VendedorController extends \yii\rest\ActiveController
 
             $token = $obj["token"];
             $vendedor = Vendedor::getBySessionToken($token);
+            var_dump(gettype($vendedor));
             $newProspecto = $obj["prospecto"];
             $accion = $obj["accionComercial"];
 
