@@ -1205,11 +1205,12 @@ class AdminController extends Controller
                 $writer->writeSheetRow('Resumen Ubicaciones', $row);
             }
         }
-        return "Generando Reporte de Usuarios";
+
         $writer->writeToFile(\XLSXWriter::sanitize_filename($filename));
         header("Content-disposition: attachment; filename=".\XLSXWriter::sanitize_filename($filename));
         header("Content-type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         setcookie($cookiee_name, $cookiee_value);
+        return "Generando Reporte de Usuarios";
         if(readfile(\XLSXWriter::sanitize_filename($filename))){
             unlink(\XLSXWriter::sanitize_filename($filename));
             return "success";
