@@ -1124,7 +1124,7 @@ class AdminController extends Controller
             }
         }
 
-        $filename = "Reporte Usuarios" . date('d-m-Y H:i') . ".xlsx";
+        $filename = "Reporte Usuarios" . date('d-m-Y H:i') . ".xls";
 
         if ($currentUser->tipo_usuario == 1 ) {
             $headers = [
