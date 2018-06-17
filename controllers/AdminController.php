@@ -1209,10 +1209,10 @@ class AdminController extends Controller
         setcookie($cookiee_name, $cookiee_value);
         if(readfile(\XLSXWriter::sanitize_filename($filename))){
             unlink(\XLSXWriter::sanitize_filename($filename));
-            //return "success";
-            exit();
+            return "success";
+            //exit();
         }else{
-            //return "error";
+            return "error";
         }
     }
 
