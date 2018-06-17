@@ -1206,13 +1206,13 @@ class AdminController extends Controller
             }
         }
 
-        $writer->writeToFile(\XLSXWriter::sanitize_filename($filename));
+        $writer->writeToFile("data//".\XLSXWriter::sanitize_filename($filename));
         header("Content-disposition: attachment; filename=".\XLSXWriter::sanitize_filename($filename));
         header("Content-type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         setcookie($cookiee_name, $cookiee_value);
 
-        if(readfile(\XLSXWriter::sanitize_filename($filename))){
-            unlink(\XLSXWriter::sanitize_filename($filename));
+        if(readfile("data//".\XLSXWriter::sanitize_filename($filename))){
+            unlink("data//".\XLSXWriter::sanitize_filename($filename));
             return "success";
             //exit();
         }else{
