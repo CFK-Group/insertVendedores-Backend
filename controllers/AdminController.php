@@ -1102,6 +1102,7 @@ class AdminController extends Controller
     //CREAR EL EXCEL DE USUARIOS
     //OK
     public function actionReporteusers(){
+        return "Generando reporte de Usuarios";
         Utils::log("Generando reporte de Usuarios");
         $cookiee_name = "token";
         $cookiee_value = $_GET["token"];
