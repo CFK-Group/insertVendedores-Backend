@@ -1400,7 +1400,7 @@ class AdminController extends Controller
                     foreach ($prospectosVendedor as $prospecto) {
                         var_dump($prospecto);
                         if(!is_null($prospecto)) {
-                            var_dump($prospecto);
+                            //var_dump($prospecto);
                             //$acciones = AccionComercial::find()->where(['id_prospecto' => $prospecto->id])->andWhere(['between', 'timestamp', $from, $today])->count();
                             //if ($acciones > 0) {
                             //    $pcac++;
