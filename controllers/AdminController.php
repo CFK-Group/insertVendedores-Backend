@@ -1102,7 +1102,7 @@ class AdminController extends Controller
     //CREAR EL EXCEL DE USUARIOS
     //OK
     public function actionReporteusers(){
-        //return "Generando reporte de Usuarios";
+
         Utils::log("Generando reporte de Usuarios");
         $cookiee_name = "token";
         $cookiee_value = $_GET["token"];
@@ -1188,6 +1188,8 @@ class AdminController extends Controller
                 $accionesVendedor = [];
             }
         }
+
+        return "Generando Reporte de Usuarios";
 
         $writer = new \XLSXWriter();
         $writer->setAuthor('CFK Group');
