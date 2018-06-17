@@ -1395,18 +1395,15 @@ class AdminController extends Controller
                 $dc = Prospecto::find()->where(['tipo_creacion' => '1'])->andWhere(['id_vendedor' => $vendedor->id])->andWhere(['between', 'create_time', $from, $today])->count();
 
                 $pcac = 0;
-                $prospectosVendedor = $vendedor->getProspectos();
+                $prospectosVendedor = $vendedor->getProspectos()->all();
 
-                    foreach ($prospectosVendedor as $prospecto) {
-                        var_dump($prospecto);
-                        if(!is_null($prospecto)) {
-                            //var_dump($prospecto);
-                            //$acciones = AccionComercial::find()->where(['id_prospecto' => $prospecto->id])->andWhere(['between', 'timestamp', $from, $today])->count();
-                            //if ($acciones > 0) {
-                            //    $pcac++;
-                            //}
+                foreach ($prospectosVendedor as $prospecto) {
+                   $acciones = AccionComercial::find()->where(['id_prospecto' => $prospecto->id])->andWhere(['between', 'timestamp', $from, $today])->count();
+                        if ($acciones > 0) {
+                            $pcac++;
                         }
                     }
+                }
 
                 $pc = Prospecto::find()->andWhere(['id_vendedor' => $vendedor->id])->andWhere(['tipo_creacion' => '2'])->orWhere(['tipo_creacion' => 3])->andWhere(['between', 'create_time', $from, $today])->count();
 
