@@ -1396,14 +1396,14 @@ class AdminController extends Controller
 
                 $pcac = 0;
                 $prospectosVendedor = $vendedor->getProspectos();
-                if  (count($prospectosVendedor)>0) {
+                return $prospectosVendedor;
                     foreach ($prospectosVendedor as $prospecto) {
                         $acciones = AccionComercial::find()->where(['id_prospecto' => $prospecto->id])->andWhere(['between', 'timestamp', $from, $today])->count();
                         if ($acciones > 0) {
                             $pcac++;
                         }
                     }
-                }
+
                 $pc = Prospecto::find()->andWhere(['id_vendedor' => $vendedor->id])->andWhere(['tipo_creacion' => '2'])->orWhere(['tipo_creacion' => 3])->andWhere(['between', 'create_time', $from, $today])->count();
 
                 $vt = Venta::find()->where(['estado_tango' => 'TERMINADA'])->andWhere(['between', 'dia_registro', date('Y-m-d H:i:S', $from), date('Y-m-d H:i:s', $today)])->andWhere(['id_vendedor' => $vendedor->id])->count();
