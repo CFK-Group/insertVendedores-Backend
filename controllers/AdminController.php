@@ -1189,7 +1189,7 @@ class AdminController extends Controller
             }
         }
 
-        return "Generando Reporte de Usuarios";
+
 
         $writer = new \XLSXWriter();
         $writer->setAuthor('CFK Group');
@@ -1205,7 +1205,7 @@ class AdminController extends Controller
                 $writer->writeSheetRow('Resumen Ubicaciones', $row);
             }
         }
-
+        return "Generando Reporte de Usuarios";
         $writer->writeToFile(\XLSXWriter::sanitize_filename($filename));
         header("Content-disposition: attachment; filename=".\XLSXWriter::sanitize_filename($filename));
         header("Content-type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
