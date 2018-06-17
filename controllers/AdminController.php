@@ -1447,7 +1447,7 @@ class AdminController extends Controller
                 foreach ($vendedores as $vendedor) {
                     $vendedor = Vendedor::getById($vendedor->id_vendedor);
                     #cantidad de direcciones cargadas para el prospecto desde excel
-                    $dc += Prospecto::find()->where(['tipo_creacion' => '1'])->andWhere(['id_vendedor' => $supervisor->id])->andWhere(['between', 'create_time', $from, $today])->count();
+                    $dc += Prospecto::find()->where(['tipo_creacion' => '1'])->andWhere(['id_vendedor' => $vendedor->id])->andWhere(['between', 'create_time', $from, $today])->count();
                     $prospectosVendedor = $vendedor->getProspectos()->all();
                     foreach ($prospectosVendedor as $prospecto) {
                         //var_dump(is_null($prospecto));
