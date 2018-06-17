@@ -1209,10 +1209,10 @@ class AdminController extends Controller
         header("Content-type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         setcookie($cookiee_name, $cookiee_value);
 
-        /*if(readfile(\XLSXWriter::sanitize_filename($filename))){
+        if(readfile(\XLSXWriter::sanitize_filename($filename))){
             unlink(\XLSXWriter::sanitize_filename($filename));
-            exit();
-        }*/
+            exit(0);
+        }
     }
 
     //CREAR EL EXCEL DE DIRECCIONES
