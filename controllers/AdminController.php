@@ -1396,7 +1396,7 @@ class AdminController extends Controller
 
                 $pcac = 0;
                 $prospectosVendedor = $vendedor->getProspectos();
-                return $prospectosVendedor;
+                return var_dump($prospectosVendedor);
                     foreach ($prospectosVendedor as $prospecto) {
                         $acciones = AccionComercial::find()->where(['id_prospecto' => $prospecto->id])->andWhere(['between', 'timestamp', $from, $today])->count();
                         if ($acciones > 0) {
