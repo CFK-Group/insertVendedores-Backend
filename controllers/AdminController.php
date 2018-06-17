@@ -1402,7 +1402,6 @@ class AdminController extends Controller
                         if ($acciones > 0) {
                             $pcac++;
                         }
-                    }
                 }
 
                 $pc = Prospecto::find()->andWhere(['id_vendedor' => $vendedor->id])->andWhere(['tipo_creacion' => '2'])->orWhere(['tipo_creacion' => 3])->andWhere(['between', 'create_time', $from, $today])->count();
