@@ -1102,8 +1102,6 @@ class AdminController extends Controller
     //CREAR EL EXCEL DE USUARIOS
     //OK
     public function actionReporteusers(){
-
-        Utils::log("Generando reporte de Usuarios");
         $cookiee_name = "token";
         $cookiee_value = $_GET["token"];
         $model = new Vendedor();
@@ -1124,7 +1122,7 @@ class AdminController extends Controller
             }
         }
 
-        $filename = "Reporte Usuarios" . date('d-m-Y H:i') . ".xls";
+        $filename = "Reporte Usuarios" . date('d-m-Y H:i') . ".xlsx";
 
         if ($currentUser->tipo_usuario == 1 ) {
             $headers = [
@@ -1213,10 +1211,7 @@ class AdminController extends Controller
 
         if(readfile(\XLSXWriter::sanitize_filename($filename))){
             unlink(\XLSXWriter::sanitize_filename($filename));
-            return "success";
-            //exit();
-        }else{
-            return "error";
+            exit();
         }
     }
 
