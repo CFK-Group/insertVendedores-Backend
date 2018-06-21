@@ -9,7 +9,8 @@ class SessionData {
 	const LOGIN_NO_USER = -2;
 	const WRONG_PASS = -3;
 	const WRONG_DEVICE = -4;
-	
+	const NO_AUTH = -5;
+
 	public $sessionToken;
 	public $statusCode;
 	public $errorDesc;
