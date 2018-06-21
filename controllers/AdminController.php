@@ -1034,13 +1034,17 @@ class AdminController extends Controller
                 //usamos la funcion para leer csv que nos entregará un arreglo por cada linea, con los
                 //campos en utf-8
                 $lines = $this->readCSV($_FILES['cvs']['tmp_name']);
-                $lines = array_filter($lines);
+                $l = array_filter($lines);
                 //si tenemos lineas procedemos a generar el modelo y a guardarlo
                 if (count($lines) > 0) {
                     //vamos uno por uno, omitiendo la linea del encabezado que es la primera
                     foreach ($lines as $line) {
                         //comprobamos si es el primer elemento del array y si no lo es procedemos
                         if ($line !== reset($lines)) {
+                            if (is_null(Vendedor::getByUsername($line[0])['id'])){
+                                $error[0][0] = "El vendedor ". $line[0] ." no existe";
+                                break;
+                            }
                             //var_dump($line);
                             $model = new Prospecto();
                             $model->create_time = time();
@@ -1069,6 +1073,8 @@ class AdminController extends Controller
                             $model->nombre = $line[11];
                             $model->deuda = strtoupper($line[12]);
                             $model->tipo_creacion = 1;
+                            $model->empresaServicios = "NINGUNO";
+                            $model->productosContratados = "NINGUNO";
                             if ($model->save()) {
                                 $counter = $counter + 1;
                             } else {
@@ -1477,31 +1483,33 @@ class AdminController extends Controller
             $dataVendedores = [];
 
             foreach ($vendedoresSupevisados as $vendedor) {
-                $vendedor = Vendedor::getById($vendedor->id_vendedor);
-                #cantidad de direcciones cargadas para el prospecto desde excel
-                $dc = Prospecto::find()->where(['tipo_creacion' => '1'])->andWhere(['id_vendedor' => $vendedor->id])->andWhere(['between', 'create_time', $from, $today])->count();
+                if ($vendedor->estado !== 1) {
+                    $vendedor = Vendedor::getById($vendedor->id_vendedor);
+                    #cantidad de direcciones cargadas para el prospecto desde excel
+                    $dc = Prospecto::find()->where(['tipo_creacion' => '1'])->andWhere(['id_vendedor' => $vendedor->id])->andWhere(['between', 'create_time', $from, $today])->count();
 
-                $pcac = 0;
-                $prospectosVendedor = $vendedor->getProspectos()->all();
+                    $pcac = 0;
+                    $prospectosVendedor = $vendedor->getProspectos()->all();
 
-                foreach ($prospectosVendedor as $prospecto) {
-                   $acciones = AccionComercial::find()->where(['id_prospecto' => $prospecto->id])->andWhere(['between', 'timestamp', $from, $today])->count();
+                    foreach ($prospectosVendedor as $prospecto) {
+                        $acciones = AccionComercial::find()->where(['id_prospecto' => $prospecto->id])->andWhere(['between', 'timestamp', $from, $today])->count();
                         if ($acciones > 0) {
                             $pcac++;
                         }
+                    }
+
+                    $pc = Prospecto::find()->andWhere(['id_vendedor' => $vendedor->id])->andWhere(['tipo_creacion' => '2'])->orWhere(['tipo_creacion' => 3])->andWhere(['between', 'create_time', $from, $today])->count();
+
+                    $vt = Venta::find()->where(['estado_tango' => 'TERMINADA'])->andWhere(['between', 'dia_registro', date('Y-m-d H:i:S', $from), date('Y-m-d H:i:s', $today)])->andWhere(['id_vendedor' => $vendedor->id])->count();
+                    $vi = Venta::find()->where(['estado_tango' => 'INS'])->andWhere(['between', 'dia_registro', date('Y-m-d H:i:S', $from), date('Y-m-d H:i:s', $today)])->andWhere(['id_vendedor' => $vendedor->id])->count();
+
+                    $dataVendedores[$vendedor->username]['direccionesCargadas'] = $dc;
+                    $dataVendedores[$vendedor->username]['prospectosConAccionComercial'] = $pcac;
+                    $dataVendedores[$vendedor->username]['prospectosCreados'] = $pc;
+                    $dataVendedores[$vendedor->username]['ventasTerminadas'] = $vt;
+                    $dataVendedores[$vendedor->username]['ventasEnInstalacion'] = $vi;
+
                 }
-
-                $pc = Prospecto::find()->andWhere(['id_vendedor' => $vendedor->id])->andWhere(['tipo_creacion' => '2'])->orWhere(['tipo_creacion' => 3])->andWhere(['between', 'create_time', $from, $today])->count();
-
-                $vt = Venta::find()->where(['estado_tango' => 'TERMINADA'])->andWhere(['between', 'dia_registro', date('Y-m-d H:i:S', $from), date('Y-m-d H:i:s', $today)])->andWhere(['id_vendedor' => $vendedor->id])->count();
-                $vi = Venta::find()->where(['estado_tango' => 'INS'])->andWhere(['between', 'dia_registro', date('Y-m-d H:i:S', $from), date('Y-m-d H:i:s', $today)])->andWhere(['id_vendedor' => $vendedor->id])->count();
-
-                $dataVendedores[$vendedor->username]['direccionesCargadas'] = $dc;
-                $dataVendedores[$vendedor->username]['prospectosConAccionComercial'] = $pcac;
-                $dataVendedores[$vendedor->username]['prospectosCreados'] = $pc;
-                $dataVendedores[$vendedor->username]['ventasTerminadas'] = $vt;
-                $dataVendedores[$vendedor->username]['ventasEnInstalacion'] = $vi;
-
             }
         }
 
@@ -1533,23 +1541,25 @@ class AdminController extends Controller
                 $vi = 0;
                 foreach ($vendedores as $vendedor) {
                     $vendedor = Vendedor::getById($vendedor->id_vendedor);
-                    #cantidad de direcciones cargadas para el prospecto desde excel
-                    $dc += Prospecto::find()->where(['tipo_creacion' => '1'])->andWhere(['id_vendedor' => $vendedor->id])->andWhere(['between', 'create_time', $from, $today])->count();
-                    $prospectosVendedor = $vendedor->getProspectos()->all();
-                    foreach ($prospectosVendedor as $prospecto) {
-                        //var_dump(is_null($prospecto));
-                        //if(!is_null($prospecto) && count($prospecto) > 0) {
-                        //var_dump($prospecto);
+                    if ($vendedor->estado !== 1) {
+                        #cantidad de direcciones cargadas para el prospecto desde excel
+                        $dc += Prospecto::find()->where(['tipo_creacion' => '1'])->andWhere(['id_vendedor' => $vendedor->id])->andWhere(['between', 'create_time', $from, $today])->count();
+                        $prospectosVendedor = $vendedor->getProspectos()->all();
+                        foreach ($prospectosVendedor as $prospecto) {
+                            //var_dump(is_null($prospecto));
+                            //if(!is_null($prospecto) && count($prospecto) > 0) {
+                            //var_dump($prospecto);
                             $acciones = AccionComercial::find()->where(['id_prospecto' => $prospecto->id])->andWhere(['between', 'timestamp', $from, $today])->count();
                             if ($acciones > 0) {
                                 $pcac++;
                             }
-                        //}
-                    }
-                    $pc += Prospecto::find()->andWhere(['id_vendedor' => $vendedor->id])->andWhere(['tipo_creacion' => '2'])->orWhere(['tipo_creacion' => 3])->andWhere(['between', 'create_time', $from, $today])->count();
+                            //}
+                        }
+                        $pc += Prospecto::find()->andWhere(['id_vendedor' => $vendedor->id])->andWhere(['tipo_creacion' => '2'])->orWhere(['tipo_creacion' => 3])->andWhere(['between', 'create_time', $from, $today])->count();
 
-                    $vt += Venta::find()->where(['estado_tango' => 'TERMINADA'])->andWhere(['between', 'dia_registro', date('Y-m-d H:i:S', $from), date('Y-m-d H:i:s', $today)])->andWhere(['id_vendedor' => $vendedor->id])->count();
-                    $vi += Venta::find()->where(['estado_tango' => 'INS'])->andWhere(['between', 'dia_registro', date('Y-m-d H:i:S', $from), date('Y-m-d H:i:s', $today)])->andWhere(['id_vendedor' => $vendedor->id])->count();
+                        $vt += Venta::find()->where(['estado_tango' => 'TERMINADA'])->andWhere(['between', 'dia_registro', date('Y-m-d H:i:S', $from), date('Y-m-d H:i:s', $today)])->andWhere(['id_vendedor' => $vendedor->id])->count();
+                        $vi += Venta::find()->where(['estado_tango' => 'INS'])->andWhere(['between', 'dia_registro', date('Y-m-d H:i:S', $from), date('Y-m-d H:i:s', $today)])->andWhere(['id_vendedor' => $vendedor->id])->count();
+                    }
                 }
                 $supervisor = Vendedor::getById($supervisor->id_supervisor);
                 $dataVendedores[$supervisor->username]['direccionesCargadas'] = $dc;

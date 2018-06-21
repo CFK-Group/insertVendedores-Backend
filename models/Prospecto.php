@@ -38,6 +38,11 @@ use Yii;
  * @property string $tipo_contacto
  * @property integer $create_time
  * @property integer $update_time
+ * @property string $empresaServicios
+ * @property string $productosContratados
+ * @property string $tienePromocion
+ * @property string $valorPromocion
+ * @property string $terminoPromocion
  *
  * @property AccionComercial[] $accionComercials
  * @property Vendedor $idVendedor
@@ -62,10 +67,11 @@ class Prospecto extends \yii\db\ActiveRecord
     {
         return [
             [['rut_prospecto', 'numero', 'nodo', 'cuadrante', 'rut_comprador', 'estado', 'id_vendedor', 'tipo_creacion', 'create_time', 'update_time'], 'integer'],
-            [['tipo_creacion', 'id_vendedor'], 'required'],
+            [['tipo_creacion', 'empresaServicios', 'productosContratados'], 'required'],
+            [['terminoPromocion'], 'safe'],
             [['nombre', 'calle', 'nombre_comprador'], 'string', 'max' => 128],
             [['dv_prospecto', 'dv_comprador'], 'string', 'max' => 1],
-            [['comuna', 'fono_contacto_1', 'fono_contacto_2', 'email', 'tipo_tv', 'tipo_fono', 'tipo_inet', 'accion_comercial', 'tipo_accion', 'tipo_contacto'], 'string', 'max' => 45],
+            [['comuna', 'fono_contacto_1', 'fono_contacto_2', 'email', 'tipo_tv', 'tipo_fono', 'tipo_inet', 'accion_comercial', 'tipo_accion', 'tipo_contacto', 'empresaServicios', 'productosContratados', 'tienePromocion', 'valorPromocion'], 'string', 'max' => 45],
             [['fono', 'cable', 'inet', 'premium', 'deuda'], 'string', 'max' => 2],
             [['id_vendedor'], 'exist', 'skipOnError' => true, 'targetClass' => Vendedor::className(), 'targetAttribute' => ['id_vendedor' => 'id']],
         ];
@@ -102,12 +108,17 @@ class Prospecto extends \yii\db\ActiveRecord
             'tipo_inet' => 'Tipo Inet',
             'accion_comercial' => 'Accion Comercial',
             'estado' => 'Estado',
-            'id_vendedor' => 'Tango Vendedor',
+            'id_vendedor' => 'Id Vendedor',
             'tipo_creacion' => 'Tipo Creacion',
             'tipo_accion' => 'Tipo Accion',
             'tipo_contacto' => 'Tipo Contacto',
             'create_time' => 'Create Time',
             'update_time' => 'Update Time',
+            'empresaServicios' => 'Empresa Servicios',
+            'productosContratados' => 'Productos Contratados',
+            'tienePromocion' => 'Tiene Promocion',
+            'valorPromocion' => 'Valor Promocion',
+            'terminoPromocion' => 'Termino Promocion',
         ];
     }
 
