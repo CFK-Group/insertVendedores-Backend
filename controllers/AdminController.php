@@ -322,132 +322,53 @@ class AdminController extends Controller
         $error = [];
         $counterNews = 0;
         $counterUpdate = 0;
-        $exist = false;
-        //antes de agregar un registro a la bd debo ver que registros desaparecen
-        $actual = Venta::findAll(['tipo_carga' => 3]);
-        $nuevas = $lines;
-        $regsOmitibles = [];
-        $noExisteBase = []; //registros antiguos que desaparecieron del listado nuevo
-        $index = null;
-
-
-        for ($i = 0; $i < count($actual); $i++) {
-            for ($j = 1; $j < count($nuevas); $j++) {
-                if (($actual[$i]['id_servicio'] == $nuevas[$j][10])){
-                    $exist = true;
-                    $index = $j;
-                    $regsOmitibles[] = $actual[$i]['id_servicio'];
-                    break;
-                } else {
-                    $exist = false;
-                }
-            }
-            //una vez que termino de recorrer la lista nueva, puedo estar seguro de si existe o no el registro.
-            if ($exist){
-                //actualizo el registro con los datos nuevos si corresponde
-                $updateVenta = Venta::findOne(['id_servicio' => $actual[$i]['id_servicio'], 'tipo_carga' => 3]);
-                $data = $nuevas[$index];
-
-                $rut = explode('-', $data[11]);
-                $updateVenta->rut_cliente = $rut[0];
-                $updateVenta->dv_cliente = $rut[1];
-                $updateVenta->mes_venta = date('n', strtotime(str_replace("/", "-", $data[0])));
-                $updateVenta->id_vendedor = Vendedor::getByUsername($data[3])['id'];
-                $updateVenta->zona = $data[4];
-                $updateVenta->territorio = $data[5];
-                $updateVenta->canal = $data[6];
-                $updateVenta->id_vivienda = $data[7];
-                $updateVenta->dia_registro = date('Y-m-d', strtotime(str_replace("/", "-", $data[8])));
-                $updateVenta->dia_final = date('Y-m-d', strtotime(str_replace("/", "-", $data[9])));
-                $updateVenta->id_servicio = $data[10];
-                $updateVenta->servicio = $data[12];
-                $updateVenta->comuna = $data[13];
-                $updateVenta->estado_venta = $data[14];
-                $updateVenta->PCS = $data[15];
-                $updateVenta->codigo_area_funcional = $data[16];
-                $updateVenta->area_funcional = utf8_encode($data[17]);
-                $updateVenta->venta_en_cobranza = $data[18];
-                $updateVenta->ciclo_en_facturacion = $data[19];
-                $updateVenta->flujo_cobranza = $data[20];
-                $updateVenta->dias_mora = $data[21];
-                $updateVenta->fecha_vencimiento = date('Y-m-d', strtotime($data[22]));
-                $updateVenta->fecha_analisis = date('Y-m-d', strtotime($data[23]));
-                $updateVenta->zona2 = $data[24];
-                $updateVenta->territorio2 = $data[25];
-                $updateVenta->tango_super = $data[26];
-                $updateVenta->nombre = $data[29];
-                $updateVenta->fono1 = $data[30];
-                $updateVenta->fono2 = $data[31];
-                $updateVenta->email = $data[32];
-                $updateVenta->monto_deuda = $data[33];
-
-                if($updateVenta->update() !== false){
-                    $error = $updateVenta->getErrors();
-                }else{
-                    $counterUpdate = $counterUpdate + 1;
-                }
+        $i = 0;
+        foreach ($lines as $data){
+            $model = new Venta();
+            if ($i == 0){
+                $model->deleteAll('tipo_carga = :carga', [':carga' => 3]);
             }else{
-                $noExisteBase[] = $actual[$i];
-            }
-        }
-
-
-        //vamos uno por uno
-        for ($i = 0; $i < count($nuevas); $i++) {
-
-            //comprobamos si es el primer elemento del array y si no lo es procedemos
-            if ($i != 0) {
-                if (!in_array($nuevas[$i][10], $regsOmitibles)) {
-                    $model = new Venta();
-                    $data = $nuevas[$i];
-                    $rut = explode('-', $data[11]);
-                    $model->rut_cliente = $rut[0];
-                    $model->dv_cliente = $rut[1];
-                    $model->mes_venta = date('n', strtotime(str_replace("/", "-", $data[0])));
-                    $model->id_vendedor = Vendedor::getByUsername($data[3])['id'];
-                    $model->zona = $data[4];
-                    $model->territorio = $data[5];
-                    $model->canal = $data[6];
-                    $model->id_vivienda = $data[7];
-                    $model->dia_registro = date('Y-m-d', strtotime(str_replace("/", "-", $data[8])));
-                    $model->dia_final = date('Y-m-d', strtotime(str_replace("/", "-", $data[9])));
-                    $model->id_servicio = $data[10];
-                    $model->servicio = $data[12];
-                    $model->comuna = $data[13];
-                    $model->estado_venta = $data[14];
-                    $model->PCS = $data[15];
-                    $model->codigo_area_funcional = $data[16];
-                    $model->area_funcional = utf8_encode($data[17]);
-                    $model->venta_en_cobranza = $data[18];
-                    $model->ciclo_en_facturacion = $data[19];
-                    $model->flujo_cobranza = $data[20];
-                    $model->dias_mora = $data[21];
-                    $model->fecha_vencimiento = date('Y-m-d', strtotime($data[22]));
-                    $model->fecha_analisis = date('Y-m-d', strtotime($data[23]));
-                    $model->zona2 = $data[24];
-                    $model->territorio2 = $data[25];
-                    $model->tango_super = $data[26];
-                    $model->nombre = $data[29];
-                    $model->fono1 = $data[30];
-                    $model->fono2 = $data[31];
-                    $model->email = $data[32];
-                    $model->monto_deuda = $data[33];
-                    $model->tipo_carga = 3;
-
-                    if ($model->save()) {
-                        $counterNews = $counterNews + 1;
-                    } else {
-                        $error = $model->getErrors();
-                        break;
-                    }
+                if (is_null(Vendedor::getByUsername($data[3])['id'])){
+                    $error[0][0] = "El vendedor ". $data[3] ." no existe";
+                    break;
                 }
-            } else {
-                if (count($nuevas[0]) != 34) {
-                    $error[0][0] = "Archivo inválido, compruebe que la cantidad de columnas sea la que corresponde";
+                $rut = explode('-', $data[11]);
+                $model->rut_cliente = $rut[0];
+                $model->dv_cliente = $rut[1];
+                $model->mes_venta = date('n', strtotime(str_replace("/", "-", $data[0])));
+                $model->id_vendedor = Vendedor::getByUsername($data[3])['id'];
+                $model->zona = $data[4];
+                $model->territorio = $data[5];
+                $model->canal = $data[6];
+                $model->id_vivienda = $data[7];
+                $model->dia_registro = date('Y-m-d', strtotime(str_replace("/", "-", $data[8])));
+                $model->dia_final = date('Y-m-d', strtotime(str_replace("/", "-", $data[9])));
+                $model->id_servicio = $data[10];
+                $model->servicio = $data[12];
+                $model->comuna = $data[13];
+                $model->estado_venta = $data[14];
+                $model->PCS = $data[15];
+                $model->codigo_area_funcional = $data[16];
+                $model->area_funcional = utf8_encode($data[17]);
+                $model->venta_en_cobranza = $data[18];
+                $model->ciclo_en_facturacion = $data[19];
+                $model->flujo_cobranza = $data[20];
+                $model->dias_mora = $data[21];
+                $model->fecha_vencimiento = date('Y-m-d', strtotime($data[22]));
+                $model->fecha_analisis = date('Y-m-d', strtotime($data[23]));
+                $model->zona2 = $data[24];
+                $model->territorio2 = $data[25];
+                $model->tipo_carga = 3;
+                if($model->save()){
+                    $counterNews = $counterNews + 1;
+                }else{
+                    $error = $model->getErrors();
                     break;
                 }
             }
+            $i++;
         }
+
         return ['counterNews' => $counterNews, 'error' => $error, 'counterUpdate' => $counterUpdate];
     }
 
@@ -616,9 +537,9 @@ class AdminController extends Controller
                         $model2 = new Vendedor();
                         $modelSave = $this->asignarModeloDotacion($model2, $nuevas[$k]);
                         //si el codigo tango no viene, omitimos
-                        if ($supervisor->username !== '-' || $supervisor->username !== '' || $supervisor->username !== ' ' || !is_null($supervisor->username)) {
+                        if ($modelSave->username !== '-' || $modelSave->username !== '' || $modelSave->username !== ' ' || !is_null($modelSave->username)) {
                             if (!$modelSave->save()) {
-                                var_dump("Usuario nuevo");
+                                //var_dump("Usuario nuevo");
                                 $error = $modelSave->getErrors();
                                 break;
                             } else {
@@ -644,6 +565,153 @@ class AdminController extends Controller
         return ['counterNews' => $counterNews, 'error' => $error, 'counterUpdate' => $counterUpdate];
     }
 
+    function loadPendienteComercial($lines){
+        $error = [];
+        $counterNews = 0;
+        $counterUpdate = 0;
+
+        $i = 0;
+        foreach ($lines as $data){
+            $model = new Venta();
+            if ($i == 0){
+                $model->deleteAll('tipo_carga = :carga', [':carga' => 2]);
+            }else{
+                if (is_null(Vendedor::getByUsername($data[4])['id'])){
+                    $error[0][0] = "El vendedor ". $data[4] ." no existe";
+                    break;
+                }
+                $rut = explode('-', $data[0]);
+                $model->rut_cliente = $rut[0];
+                $model->dv_cliente = $rut[1];
+                $model->servicio = $data[1];
+                $model->id_servicio = $data[2];
+                $model->id_vivienda = $data[3];
+                $model->id_vendedor = Vendedor::getByUsername($data[4])['id'];
+                $model->canal = $data[5];
+                $model->equipo = utf8_encode($data[6]);
+                $model->dia_registro = date('Y-m-d', strtotime(str_replace("/", "-", $data[7])));
+                $model->mes_venta = date('n', strtotime(str_replace("/", "-", $data[7])));
+                $model->comuna = $data[8];
+                $model->area_funcional = $data[9];
+                $model->tipo_carga = 2;
+                if($model->save()){
+                    $counterNews = $counterNews + 1;
+                }else{
+                    $error = $model->getErrors();
+                    break;
+                }
+            }
+            $i++;
+        }
+
+        return ['counterNews' => $counterNews, 'error' => $error, 'counterUpdate' => $counterUpdate];
+    }
+
+    function loadPermanencia($lines){
+        $error = [];
+        $counterNews = 0;
+        $counterUpdate = 0;
+
+        $i = 0;
+        foreach ($lines as $data){
+            $model = new Venta();
+            if ($i == 0){
+                $model->deleteAll('tipo_carga = :carga', [':carga' => 4]);
+            }else{
+                if (is_null(Vendedor::getByUsername($data[4])['id'])){
+                    $error[0][0] = "El vendedor ". $data[4] ." no existe";
+                    break;
+                }
+                $rut = explode('-', $data[0]);
+                $model->rut_cliente = $rut[0];
+                $model->dv_cliente = $rut[1];
+                $model->servicio = $data[1];
+                $model->id_servicio = $data[2];
+                $model->id_vivienda = $data[3];
+                $model->id_vendedor = Vendedor::getByUsername($data[4])['id'];
+                $model->dia_registro = date('Y-m-d', strtotime(str_replace("/", "-", $data[5])));
+                $model->mes_venta = date('n', strtotime(str_replace("/", "-", $data[5])));
+                $model->dia_final = date('Y-m-d', strtotime(str_replace("/", "-", $data[6])));
+                $model->comuna = $data[7];
+                $model->canal = $data[8];
+                $model->equipo = utf8_encode($data[9]);
+                $model->tipo_venta = $data[10];
+                $model->b2b = $data[11];
+                $model->producto = utf8_encode($data[12]);
+                $model->valor = $data[13];
+                $model->observaciones = $data[14];
+                $model->estado_tango = $data[15];
+                $model->facturada = $data[16];
+                $model->comisionable = $data[17];
+                $model->estado_venta1 = $data[18];
+                $model->id_proyecto = intval($data[19]);
+                if (empty($data[20])) {
+                    $model->fecha_proyecto = "";
+                } else {
+                    $model->fecha_proyecto = date('Y-m-d', strtotime(str_replace("/", "-", $data[20])));
+                }
+                $model->portal = $data[21];
+                $model->vtr = $data[22];
+                $model->bst = $data[23];
+                $model->tipo_carga = 4;
+                if($model->save()){
+                    $counterNews = $counterNews + 1;
+                }else{
+                    $error = $model->getErrors();
+                    break;
+                }
+            }
+            $i++;
+        }
+
+        return ['counterNews' => $counterNews, 'error' => $error, 'counterUpdate' => $counterUpdate];
+
+    }
+
+    function loadVisaciones($lines){
+        $error = [];
+        $counterNews = 0;
+        $counterUpdate = 0;
+
+        $i = 0;
+        foreach ($lines as $data){
+            $model = new Venta();
+            if ($i == 0){
+                $model->deleteAll('tipo_carga = :carga', [':carga' => 5]);
+            }else{
+                if (is_null(Vendedor::getByUsername($data[1])['id'])){
+                    $error[0][0] = "El vendedor ". $data[1] ." no existe";
+                    break;
+                }
+                $rut = explode('-', $data[2]);
+                $model->rut_cliente = $rut[0];
+                $model->dv_cliente = $rut[1];
+                $model->dia_registro = date('Y-m-d H:i', strtotime(str_replace("/", "-", $data[0])));
+                $model->mes_venta = date('n', strtotime(str_replace("/", "-", $data[0])));
+                $model->id_vendedor = Vendedor::getByUsername($data[1])['id'];
+                $model->canal = $data[3];
+                $model->estado_rendicion = $data[4];
+                $model->fecha_visado = date('Y-m-d', strtotime(str_replace("/", "-", $data[5])));
+                $model->visacion = utf8_encode($data[6]);
+                $model->no_visado = utf8_encode($data[7]);
+                $model->motivos_en_regularizacion = utf8_encode($data[8]);
+                $model->motivos_rechazo_visado = utf8_encode($data[9]);
+                $model->observaciones_visado = utf8_encode($data[10]);
+                $model->cambio_codigo = utf8_encode($data[11]);
+                $model->n_servicio = utf8_encode($data[12]);
+                $model->tipo_carga = 5;
+                if($model->save()){
+                    $counterNews = $counterNews + 1;
+                }else{
+                    $error = $model->getErrors();
+                    break;
+                }
+            }
+            $i++;
+        }
+        return ['counterNews' => $counterNews, 'error' => $error, 'counterUpdate' => $counterUpdate];
+    }
+
     function asignarModeloDotacion($model, $data){
         $model->username = utf8_encode($data[0]);
         $model->zona = utf8_encode($data[1]);
@@ -658,6 +726,7 @@ class AdminController extends Controller
         $model->email = utf8_encode($data[11]);
         $model->desc_cargo = utf8_encode($data[12]);
         $model->desc_empresa = utf8_encode($data[15]);
+        $model->hash = password_hash(substr(trim($data[8]),1, 4), PASSWORD_DEFAULT);
         //$model->smartflex = ($data[17] == '') ? null : strtotime($data[17]);
 
         switch ($data[18]){
@@ -767,7 +836,7 @@ class AdminController extends Controller
             $model->territorio = $data[25];
             $model->tango_super = $data[27];
             $model->b2b = $data[32];
-
+            $model->tipo_carga = 1;
             $model->comisionable = "Si";
 
             if ($data[9] == ""){
@@ -1029,7 +1098,6 @@ class AdminController extends Controller
         $fileChecker = false;
         $counterNews = 0;
         $counterUpdate = 0;
-        $counterPerdidas = 0;
         //var_dump($tipoBase);
         //verificamos si la variable $_FILES existe
         try{
@@ -1051,7 +1119,6 @@ class AdminController extends Controller
                                 $error = $response['error'];
                                 $counterNews = $response['counterNews'];
                                 $counterUpdate = $response['counterUpdate'];
-                                $counterPerdidas = $response['counterPerdidas'];
                                 break;
                             case 2:
                                 $response = $this->loadCobranza($lines);
@@ -1077,6 +1144,24 @@ class AdminController extends Controller
                                 $counterNews = $response['counterNews'];
                                 $counterUpdate = $response['counterUpdate'];
                                 break;
+                            case 6:
+                                $response = $this->loadPendienteComercial($lines);
+                                $error = $response['error'];
+                                $counterNews = $response['counterNews'];
+                                $counterUpdate = $response['counterUpdate'];
+                                break;
+                            case 7:
+                                $response = $this->loadPermanencia($lines);
+                                $error = $response['error'];
+                                $counterNews = $response['counterNews'];
+                                $counterUpdate = $response['counterUpdate'];
+                                break;
+                            case 8:
+                                $response = $this->loadVisaciones($lines);
+                                $error = $response['error'];
+                                $counterNews = $response['counterNews'];
+                                $counterUpdate = $response['counterUpdate'];
+                                break;
                             default:
                                 $error = [];
                                 $counter = 0;
@@ -1096,7 +1181,7 @@ class AdminController extends Controller
         }catch(UploadException $e){
             $error[0][0] = $e->getMessage();
         }
-        return $this->render('uploadventas', array('error' => $error, 'counterNews' => $counterNews, 'counterUpdate' => $counterUpdate, 'fileChecker' => $fileChecker, 'counterPerdidas' => $counterPerdidas));
+        return $this->render('uploadventas', array('error' => $error, 'counterNews' => $counterNews, 'counterUpdate' => $counterUpdate, 'fileChecker' => $fileChecker));
     }
 
     //CREAR EL EXCEL DE USUARIOS
@@ -1130,7 +1215,7 @@ class AdminController extends Controller
                 'Tango' => 'string',
                 'Tango Super' => 'string',
                 'Accion Realizada' => 'string',
-                'Fecha' => 'datetime',
+                'Fecha' => 'date',
                 'Ubicación' => 'string'
             ];
         }else{
@@ -1139,7 +1224,7 @@ class AdminController extends Controller
                 'Tango' => 'string',
                 'Tango Super' => 'string',
                 'Accion Realizada' => 'string',
-                'Fecha' => 'datetime',
+                'Fecha' => 'date',
             ];
         }
 
@@ -1161,13 +1246,13 @@ class AdminController extends Controller
 
                 if (count($accionesVendedor) > 0){
                     foreach ($accionesVendedor[0] as $accionVendedor){
-                        if ($accionVendedor->accion != 'Update ubicacion') {
+                        if ($accionVendedor->accion != 'update ubicacion') {
                             $dataAcciones[] = [
                                 $vendedor->nombre,
                                 $vendedor->username,
                                 !is_null($supervisor) ? $supervisor->username: "",
                                 $accionVendedor->accion,
-                                date('Y-m-d H:i',$accionVendedor->timestamp),
+                                date('Y-m-d',$accionVendedor->timestamp),
                                 $currentUser->tipo_usuario == 1 ? $accionVendedor->lat.", ".$accionVendedor->lon : ""
                             ];
                         }else{
@@ -1176,7 +1261,7 @@ class AdminController extends Controller
                                 $vendedor->username,
                                 !is_null($supervisor) ? $supervisor->username: "",
                                 $accionVendedor->accion,
-                                date('Y-m-d H:i',$accionVendedor->timestamp),
+                                date('Y-m-d',$accionVendedor->timestamp),
                                 $accionVendedor->lat.", ".$accionVendedor->lon
                             ];
                         }
@@ -1213,6 +1298,7 @@ class AdminController extends Controller
             unlink(\XLSXWriter::sanitize_filename($filename));
             exit(0);
         }
+
     }
 
     //CREAR EL EXCEL DE DIRECCIONES
@@ -1284,14 +1370,15 @@ class AdminController extends Controller
                         if  (is_null($direccion->id_vendedor)){
                             $vendedor = "No Asigando";
                         }else{
-                            $vendedor = trim(($direccion->getIdVendedor()->one()))['username'];
+                            $vendedor = $direccion->getIdVendedor()->one();
+                            $vendedor = $vendedor['username'];
                         }
                         if (count($accionesComerciales) > 0){
                             foreach ($accionesComerciales as $accionComercial) {
                                 $dataDireccion[] = [
                                     trim($direccion->nombre),
                                     trim($direccion->rut_prospecto) . ' - ' . trim($direccion->dv_prospecto),
-                                    $direccion->tipo_carga == 1 ? "Carga por Excel" : "Carga Manual",
+                                    $direccion->tipo_creacion == 1 ? "Carga por Excel" : "Carga Manual",
                                     trim($direccion->calle),
                                     trim($direccion->comuna),
                                     trim($direccion->nodo),
@@ -1319,7 +1406,7 @@ class AdminController extends Controller
                             $dataDireccion[] = [
                                 trim($direccion->nombre),
                                 trim($direccion->rut_prospecto) . ' - ' . trim($direccion->dv_prospecto),
-                                $direccion->tipo_carga == 1 ? "Carga por Excel" : "Carga Manual",
+                                $direccion->tipo_creacion == 1 ? "Carga por Excel" : "Carga Manual",
                                 trim($direccion->calle),
                                 trim($direccion->comuna),
                                 trim($direccion->nodo),

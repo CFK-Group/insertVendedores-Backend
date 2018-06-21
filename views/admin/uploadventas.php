@@ -20,6 +20,10 @@
                             <option value="3">Base de Desconexiones</option>
                             <!--<option value="4">Base de Apertura</option>-->
                             <option value="5">Base de Dotación</option>
+
+                            <option value="6">Pendiente Comercial</option>
+                            <option value="7">Permanencia</option>
+                            <option value="8">Visaciones</option>
                         </select>
                     </div>
 
@@ -68,7 +72,6 @@
                 <div class="callout callout-success">
                     <h4>Perfecto</h4>
                     <p>Se han creado <?= $counterNews ?> nuevos registros, además hemos actualizado <?= $counterUpdate ?> registros.</p>
-                    <p>Se han detectado <?= $counterPerdidas ?> ventas potencialmente no comisiables</p>
                 </div>
                 <?php
             }
