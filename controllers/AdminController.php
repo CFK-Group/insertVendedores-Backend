@@ -973,7 +973,7 @@ class AdminController extends Controller
     //OK
     public function actionGetprospectos()
     {
-        ini_set('memory_limit', '2048M');
+        ini_set('memory_limit', '-1');
         $model = new Prospecto();
         if (Yii::$app->user->identity->tipo_usuario != 1) {
             $direcciones = $model->getProspectobysuper(Yii::$app->user->id);
@@ -1101,6 +1101,7 @@ class AdminController extends Controller
     public function actionUploadcsvventa()
     {
         ini_set('memory_limit', '2048M');
+        ini_set('max_execution_time', 3000);
         $error = [];
         $fileChecker = false;
         $counterNews = 0;
