@@ -354,7 +354,7 @@ class VendedorController extends \yii\rest\ActiveController
         /*if(\Yii::$app->user->getIdentity()->tipo_usuario == 2){
 		    return $user->getVentas();
         }else{*/
-            return $user->getVentas();
+            return $user->getVentas()->all();
         //}
 	}
 	
