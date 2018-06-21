@@ -973,6 +973,7 @@ class AdminController extends Controller
     //OK
     public function actionGetprospectos()
     {
+        ini_set('memory_limit', '2048M');
         $model = new Prospecto();
         if (Yii::$app->user->identity->tipo_usuario != 1) {
             $direcciones = $model->getProspectobysuper(Yii::$app->user->id);
