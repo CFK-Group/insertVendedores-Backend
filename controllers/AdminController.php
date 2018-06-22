@@ -221,10 +221,10 @@ class AdminController extends Controller
         ini_set('max_execution_time', 300);
         $startPeriod = date('Y-m-d H:i:s', strtotime('midnight first day of 3 months ago'));
 
-        $poolA = Venta::find()->where(['>=','dia_registro', $startPeriod])->all();
+        $poolA = Venta::find()->where(['>=','dia_registro', $startPeriod])->andWhere(['tipo_carga' => 1])->all();
        //var_dump("Estas existen en la bd");
        //var_dump(count($poolA));
-        //var_dump($poolA);
+       //var_dump($poolA);
         $poolAids = []; //todos los id_servicio de las ventas ya existentes
         $poolB = $lines;
         $poolBids = []; //todos los id_servicio de las ventas nuevas
@@ -247,7 +247,7 @@ class AdminController extends Controller
 
         foreach ($poolB as $ventaNueva) {
             if ($iter > 0) {
-                if($tipoBase =='vtr' && $ventaNueva[16] !== 'A') {
+                if(($tipoBase =='vtr' && $ventaNueva[16] !== 'A') || ($tipoBase == 'portal')) {
                     if (in_array(intval($ventaNueva[$index_idServicio]), $poolAids)) {
                         //Si el idServicio de la venta nueva existe en el arreglo de ventas antiguas, acualizaremos los datos
                         $venta = Venta::findOne(['id_servicio' => intval($ventaNueva[$index_idServicio])]);
@@ -286,8 +286,6 @@ class AdminController extends Controller
                             break;
                         }
                     }
-                }else{
-
                 }
             }
             $iter = $iter + 1;
@@ -847,7 +845,7 @@ class AdminController extends Controller
             }else{
                 $model->estado_tango = "TERMINADA";
             }
-
+            $model->tipo_carga = 1;
             //REVISAR QUE VIENEN DE LA BASE DEL PORTAL.
         }elseif($tipoBase == 'portal'){
 
@@ -897,6 +895,7 @@ class AdminController extends Controller
             }else{
                 $model->estado_tango = "TERMINADA";
             }
+            $model->tipo_carga = 1;
         }
 
         return $model;
@@ -1196,6 +1195,9 @@ class AdminController extends Controller
         return $this->render('uploadventas', array('error' => $error, 'counterNews' => $counterNews, 'counterUpdate' => $counterUpdate, 'fileChecker' => $fileChecker));
     }
 
+    public function actionReporteventas(){
+        var_dump("reporte de ventas");
+    }
     //CREAR EL EXCEL DE USUARIOS
     //OK
     public function actionReporteusers(){

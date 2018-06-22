@@ -117,7 +117,7 @@ $series = $series . "]";
 
 
 <div class="row">
-        <div class="col-lg-5 col-lg-offset-1 col-xs-6">
+        <div class="col-lg-4 col-xs-6">
             <!-- small box -->
             <div class="small-box bg-green" id="direccion">
                 <div class="inner">
@@ -136,7 +136,7 @@ $series = $series . "]";
             </div>
         </div>
 
-        <div class="col-lg-5 col-xs-6">
+        <div class="col-lg-4 col-xs-6">
             <!-- small box -->
             <div class="small-box bg-green" id="usuario">
                 <div class="inner">
@@ -147,6 +147,22 @@ $series = $series . "]";
                     <i class="fa fa-user"></i>
                 </div>
                 <a class="small-box-footer" data-toggle="modal" data-target="#user-modal" >
+                    Descargar <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-green" id="usuario">
+                <div class="inner">
+                    <h3>Descargar Excel</h3>
+                    <p>con el Reporte de Ventas mensual</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-line-chart"></i>
+                </div>
+                <a class="small-box-footer" data-toggle="modal" data-target="#ventas-modal" >
                     Descargar <i class="fa fa-arrow-circle-right"></i>
                 </a>
             </div>
@@ -295,6 +311,45 @@ if ($usuario->tipo_usuario == 1) {
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                     <button type="submit" class="btn btn-primary" id="submit-usr" form="dw_usr">Descargar</i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="ventas-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Reporte de Ventas</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Seleccione el intervalo de fechas para obtener los datos</p>
+                    <form action="<?=Yii::getAlias('@web').'/admins/reporteventas'?>" method="GET" id="dw_ventas">
+                        <div class="form-group">
+                            <label for="from">Mes: &nbsp;&nbsp;</label>
+                            <select>
+                                <option value="">Seleccione</option>
+                                <option value="1">Enero</option>
+                                <option value="2">Febrero</option>
+                                <option value="3">Marzo</option>
+                                <option value="4">Abril</option>
+                                <option value="5">Mayo</option>
+                                <option value="6">Junio</option>
+                                <option value="7">Julio</option>
+                                <option value="8">Agosto</option>
+                                <option value="9">Septiembre</option>
+                                <option value="10">Octubre</option>
+                                <option value="11">Noviembre</option>
+                                <option value="12">Diciembre</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary" id="submit-usr" form="dw_ventas">Descargar</i></button>
                 </div>
             </div>
         </div>
