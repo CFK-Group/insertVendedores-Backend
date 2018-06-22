@@ -251,7 +251,6 @@ class VendedorController extends \yii\rest\ActiveController
 
             $idProspecto = $prospecto["id"];
             $prospectoBD = Prospecto::findOne(["id"=> $idProspecto]);
-            var_dump($prospectoBD);
 
             $prospectoBD->updateAttributes($prospecto);
 
