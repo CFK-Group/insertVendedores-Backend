@@ -10,7 +10,6 @@ $config = [
     'language' => 'es-ES',
     'charset' => 'utf-8',
     'timeZone' => 'America/Santiago',
-    'language' => 'es-ES',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => ['@adminlte/widgets'=>'@vendor/adminlte/yii2-widgets'],
@@ -125,6 +124,7 @@ $config = [
                             'GET /' => 'index',
                             'GET ventasperdidas' => 'ventasperdidas',
                             'GET reporteusers' => 'reporteusers',
+                            'GET reporteventas' => 'reporteventas',
                             'GET reportedirecciones' => 'reportedirecciones',
                             'GET resumedata' => 'resumedata',
                             //'POST exceltest' => 'exceltest'
