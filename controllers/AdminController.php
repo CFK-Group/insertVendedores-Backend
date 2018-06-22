@@ -47,11 +47,14 @@ class AdminController extends Controller
         $line_of_text = [];
         while (!feof($file_handle)) {
             $read = fgetcsv($file_handle, 1024, ';');
-            $helper = [];
-            if (is_array($read) || is_object($read)) {
-                foreach ($read as $field) {
-                    $helper[] = $field;
-                    //var_dump($helper);
+            if (gettype($read) !== 'boolean') {
+                $helper = [];
+                if ((is_array($read) || is_object($read))) {
+                    //var_dump($read);
+                    //var_dump(gettype($read));
+                    foreach ($read as $field) {
+                        $helper[] = $field;
+                    }
                 }
             }
             //var_dump("------");
@@ -1035,52 +1038,53 @@ class AdminController extends Controller
                 //usamos la funcion para leer csv que nos entregará un arreglo por cada linea, con los
                 //campos en utf-8
                 $lines = $this->readCSV($_FILES['cvs']['tmp_name']);
-                $l = array_filter($lines);
+                //var_dump($lines);
                 //si tenemos lineas procedemos a generar el modelo y a guardarlo
                 if (count($lines) > 0) {
                     //vamos uno por uno, omitiendo la linea del encabezado que es la primera
                     foreach ($lines as $line) {
                         //comprobamos si es el primer elemento del array y si no lo es procedemos
-                        if ($line !== reset($lines)) {
-                            if (is_null(Vendedor::getByUsername($line[0])['id'])){
-                                $error[0][0] = "El vendedor ". $line[0] ." no existe";
-                                break;
-                            }
-                            //var_dump($line);
-                            $model = new Prospecto();
-                            $model->create_time = time();
-                            $rut = explode("-", $line[10]);
-                            $model->id_vendedor = Vendedor::getByUsername($line[0])['id'];
-                            $model->comuna = utf8_encode($line[1]);
-                            $model->calle = utf8_encode($line[2]);
-                            $model->numero = $line[3];
-                            $model->nodo = $line[4];
-                            $model->cuadrante = $line[5];
-                            $model->fono = strtoupper($line[6]);
-                            $model->cable = strtoupper($line[7]);
-                            $model->inet = strtoupper($line[8]);
-                            $model->premium = strtoupper($line[9]);
-                            if (empty($rut[0])) {
-                                $model->rut_prospecto = null;
-                            } else {
-                                $model->rut_prospecto = $rut[0];
-                            }
+                        if (!empty($line)){
+                            if ($line !== reset($lines)) {
+                                if (is_null(Vendedor::getByUsername($line[0])['id'])) {
+                                    $error[0][0] = "El vendedor " . $line[0] . " no existe";
+                                    break;
+                                }
+                                $model = new Prospecto();
+                                $model->create_time = time();
+                                $rut = explode("-", $line[10]);
+                                $model->id_vendedor = Vendedor::getByUsername($line[0])['id'];
+                                $model->comuna = utf8_encode($line[1]);
+                                $model->calle = utf8_encode($line[2]);
+                                $model->numero = $line[3];
+                                $model->nodo = $line[4];
+                                $model->cuadrante = $line[5];
+                                $model->fono = strtoupper($line[6]);
+                                $model->cable = strtoupper($line[7]);
+                                $model->inet = strtoupper($line[8]);
+                                $model->premium = strtoupper($line[9]);
+                                if (empty($rut[0])) {
+                                    $model->rut_prospecto = null;
+                                } else {
+                                    $model->rut_prospecto = $rut[0];
+                                }
 
-                            if (empty($rut[1])) {
-                                $model->rut_prospecto = null;
-                            } else {
-                                $model->dv_prospecto = $rut[1];
-                            }
-                            $model->nombre = $line[11];
-                            $model->deuda = strtoupper($line[12]);
-                            $model->tipo_creacion = 1;
-                            $model->empresaServicios = "NINGUNO";
-                            $model->productosContratados = "NINGUNO";
-                            if ($model->save()) {
-                                $counter = $counter + 1;
-                            } else {
-                                $error = $model->getErrors();
-                                break;
+                                if (empty($rut[1])) {
+                                    $model->rut_prospecto = null;
+                                } else {
+                                    $model->dv_prospecto = $rut[1];
+                                }
+                                $model->nombre = $line[11];
+                                $model->deuda = strtoupper($line[12]);
+                                $model->tipo_creacion = 1;
+                                $model->empresaServicios = "NINGUNO";
+                                $model->productosContratados = "NINGUNO";
+                                if ($model->save()) {
+                                    $counter = $counter + 1;
+                                } else {
+                                    $error = $model->getErrors();
+                                    break;
+                                }
                             }
                         }
                     }
