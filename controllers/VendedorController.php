@@ -188,6 +188,7 @@ class VendedorController extends \yii\rest\ActiveController
             $newProspecto["tipo_creacion"] = Prospecto::CREACION_USER;
             $newProspecto["id_vendedor"] = $vendedor->id;
 
+
             $prospecto = new Prospecto();
             $prospecto->updateAttributes($newProspecto);
             $prospecto->update_time = time();
@@ -240,9 +241,21 @@ class VendedorController extends \yii\rest\ActiveController
             $token = $object["token"];
             $prospecto = $object["prospecto"];
 
+            if($prospecto["productosContratados"] === ""){
+                $prospecto["productosContratados"] = "No sabe/No responde";
+            }
+            if($prospecto["empresaServicios"] === ""){
+                $prospecto["empresaServicios"] = "No sabe/No responde";
+            }
+
+
             $idProspecto = $prospecto["id"];
             $prospectoBD = Prospecto::findOne(["id"=> $idProspecto]);
+            var_dump($prospectoBD);
+
             $prospectoBD->updateAttributes($prospecto);
+
+
             $prospectoBD->update_time = time();
             $prospectoBD->save();
 

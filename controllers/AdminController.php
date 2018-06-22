@@ -1196,7 +1196,97 @@ class AdminController extends Controller
     }
 
     public function actionReporteventas(){
-        var_dump("reporte de ventas");
+        $request = \Yii::$app->request;
+        $get = $request->get();
+        $mes = $get['mes'];
+        $cookiee_name = "token";
+        $cookiee_value = $get["token"];
+
+        $ventas = Venta::find()->where(['mes_venta' => $mes])->andWhere(['<>', 'equipo', 'TEST'])->all();
+
+        $headers = [
+            'Rut Cliente'=>'string',
+            'Clase de Servicio'=>'string',
+            'Servicio'=>'number',
+            'Vivienda'=>'number',
+            'Codigo Vendedor'=>'string',
+            'Supervisor'=>'string',
+            'Fecha Ingreso'=>'date',
+            'Fecha Término'=>'date',
+            'Comuna'=>'string',
+            'Canal'=>'string',
+            'Equipo'=>'string',
+            'Tipo de Venta'=>'string',
+            'B2B'=>'string',
+            'Producto'=>'string',
+            'Valor'=>'string',
+            'Id. Transacción'=>'number',
+            'Observaciones'=>'string',
+            'Estado Tango'=>'string',
+            'Facturada'=>'string',
+            'Cambio Código'=>'string',
+            'Comisionable'=>'string',
+            'Estado Venta'=>'string',
+            'BST'=>'string',
+            'Promoción No Agregada'=>'string',
+        ];
+
+        $headerStyle = [
+            'font' => 'Arial',
+            'font-size' => 10,
+            'font-style' => 'bold'
+        ];
+
+        $data = [];
+        foreach ($ventas as $venta) {
+            $vendedor = Vendedor::findIdentity($venta["id_vendedor"]);
+            $data[] = [
+                $venta['rut_cliente'].'-'.$venta['dv_cliente'],
+                $venta['servicio'],
+                $venta['id_servicio'],
+                $venta['id_vivienda'],
+                $vendedor['username'],
+                $venta['tango_super'],
+                $venta['dia_registro'],
+                $venta['dia_final'],
+                $venta['comuna'],
+                $venta['canal'],
+                $venta['equipo'],
+                $venta['tipo_venta'],
+                $venta['b2b'],
+                $venta['producto'],
+                $venta['valor'],
+                $venta['id_transaccion'],
+                $venta['observaciones'],
+                $venta['estado_tango'],
+                $venta['facturada'],
+                "",
+                $venta["comisionable"],
+                $venta['estado_venta'],
+                $venta['bst'],
+                $venta['bst'],
+                ""
+            ];
+        }
+
+        $writer = new \XLSXWriter();
+        $writer->setAuthor('CFK Group');
+
+        $writer->writeSheetHeader('Reporte de Ventas', $headers, $headerStyle);
+        foreach($data as $row) {
+            $writer->writeSheetRow('Reporte de Ventas', $row);
+        }
+
+        $filename = 'ReporteVentas'. date('d-m-Y H:i') . ".xlsx";
+        $writer->writeToFile(\XLSXWriter::sanitize_filename($filename));
+        header("Content-disposition: attachment; filename=".\XLSXWriter::sanitize_filename($filename));
+        header("Content-type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        setcookie($cookiee_name, $cookiee_value);
+
+        if(readfile(\XLSXWriter::sanitize_filename($filename))){
+            unlink(\XLSXWriter::sanitize_filename($filename));
+            exit(0);
+        }
     }
     //CREAR EL EXCEL DE USUARIOS
     //OK
