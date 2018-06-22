@@ -1044,7 +1044,7 @@ class AdminController extends Controller
                     foreach ($lines as $line) {
                         //comprobamos si es el primer elemento del array y si no lo es procedemos
                         if (!empty($line)){
-                            if ($line !== reset($lines)) {
+                            if ($line !== $lines[0]) {
                                 if (is_null(Vendedor::getByUsername($line[0])['id'])) {
                                     $error[0][0] = "El vendedor " . $line[0] . " no existe";
                                     break;
