@@ -1578,21 +1578,27 @@ class AdminController extends Controller
             $ventasTerminadas = Venta::find()->where(['estado_tango' => 'TERMINADA'])->andWhere(['between', 'dia_registro', date('Y-m-d H:i:s', $from), date('Y-m-d H:i:s', $today)])->andWhere(['in', 'id_vendedor', $vendedoresSupevisados])->count();
             $ventasEnInstalacion = Venta::find()->where(['estado_tango' => 'INS'])->andWhere(['between', 'dia_registro', date('Y-m-d H:i:S', $from), date('Y-m-d H:i:s', $today)])->andWhere(['in', 'id_vendedor', $vendedoresSupevisados])->count();
 
+            $prospectosConMail = Prospecto::find()->where('is not','emal', 'null')->count();
             $dataVendedores = [];
 
             foreach ($vendedoresSupevisados as $vendedor) {
                 if ($vendedor->estado !== 1) {
                     $vendedor = Vendedor::getById($vendedor->id_vendedor);
-                    #cantidad de direcciones cargadas para el prospecto desde excel
+                    #cantidad de direcciones cargadas para el vendedor desde excel
                     $dc = Prospecto::find()->where(['tipo_creacion' => '1'])->andWhere(['id_vendedor' => $vendedor->id])->andWhere(['between', 'create_time', $from, $today])->count();
 
                     $pcac = 0;
+                    $pcm = 0;
                     $prospectosVendedor = $vendedor->getProspectos()->all();
 
                     foreach ($prospectosVendedor as $prospecto) {
                         $acciones = AccionComercial::find()->where(['id_prospecto' => $prospecto->id])->andWhere(['between', 'timestamp', $from, $today])->count();
                         if ($acciones > 0) {
                             $pcac++;
+                        }
+
+                        if (!is_null($prospecto->email)){
+                            $pcm++;
                         }
                     }
 
@@ -1606,6 +1612,7 @@ class AdminController extends Controller
                     $dataVendedores[$vendedor->username]['prospectosCreados'] = $pc;
                     $dataVendedores[$vendedor->username]['ventasTerminadas'] = $vt;
                     $dataVendedores[$vendedor->username]['ventasEnInstalacion'] = $vi;
+                    $dataVendedores[$vendedor->username]['prospectosConMail'] = $pcm;
 
                 }
             }
@@ -1628,6 +1635,8 @@ class AdminController extends Controller
             $ventasTerminadas = Venta::find()->where(['estado_tango' => 'TERMINADA'])->andWhere(['between', 'dia_registro', date('Y-m-d H:i:s', $from), date('Y-m-d H:i:s', $today)])->andWhere(['in', 'id_vendedor', $vendedoresSupevisados])->count();
             $ventasEnInstalacion = Venta::find()->where(['estado_tango' => 'INS'])->andWhere(['between', 'dia_registro', date('Y-m-d H:i:S', $from), date('Y-m-d H:i:s', $today)])->andWhere(['in', 'id_vendedor', $vendedoresSupevisados])->count();
 
+            $prospectosConMail = Prospecto::find()->where(['is not','email', null])->count();
+
             $dataVendedores = [];
 
             foreach ($supervisores as $supervisor) {
@@ -1637,6 +1646,7 @@ class AdminController extends Controller
                 $pc = 0;
                 $vt = 0;
                 $vi = 0;
+                $pcm = 0;
                 foreach ($vendedores as $vendedor) {
                     $vendedor = Vendedor::getById($vendedor->id_vendedor);
                     if ($vendedor->estado !== 1) {
@@ -1650,6 +1660,9 @@ class AdminController extends Controller
                             $acciones = AccionComercial::find()->where(['id_prospecto' => $prospecto->id])->andWhere(['between', 'timestamp', $from, $today])->count();
                             if ($acciones > 0) {
                                 $pcac++;
+                            }
+                            if (!is_null($prospecto->email)){
+                                $pcm++;
                             }
                             //}
                         }
@@ -1665,6 +1678,8 @@ class AdminController extends Controller
                 $dataVendedores[$supervisor->username]['prospectosCreados'] = $pc;
                 $dataVendedores[$supervisor->username]['ventasTerminadas'] = $vt;
                 $dataVendedores[$supervisor->username]['ventasEnInstalacion'] = $vi;
+                $dataVendedores[$supervisor->username]['prospectosConMail'] = $pcm;
+
 
             }
         }
@@ -1677,7 +1692,8 @@ class AdminController extends Controller
             'prospectosCreados' => $prospectosCreados,
             'ventasTerminadas' => $ventasTerminadas,
             'ventasEnInstalacion' => $ventasEnInstalacion,
-            'dataVendedores' => $dataVendedores
+            'dataVendedores' => $dataVendedores,
+            'prospectosConMail' => $prospectosConMail
         ];
         return Json::encode($return);
     }

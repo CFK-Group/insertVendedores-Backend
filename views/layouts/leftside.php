@@ -26,73 +26,144 @@ use yii\helpers\Url;
             </div>
         </div>
         <!-- sidebar menu: : style can be found in sidebar.less -->
-        <?=
-        Menu::widget(
-            [
-                'options' => ['class' => 'sidebar-menu'],
-                'items' => [
-                    [
-                        'label' => 'Menu',
-                        'options' => ['class' => 'header']
-                    ],
-                    [
-                        'label' => 'Dashboard',
-                        'icon' => 'fa fa-dashboard',
-                        'url' => '@web/admins',
-                        'active' => $this->context->route == 'admin/index'
-                    ],
-                    [
-                        'label' => 'Resumenes',
-                        'icon' => 'fa fa-table',
-                        'url' => '#',
-                        'active' => $classActiveR,
-                        'items' => [
-                            [
-                                'label' => 'Resumen Direcciones',
-                                'icon' => 'fa fa-table',
-                                'url' => '@web/admins/direcciones',
-                                'active' => $this->context->route == 'admin/getprospectos'
-                            ],
-                            [
-                                'label' => 'Resumen Usuarios',
-                                'icon' => 'fa fa-table',
-                                'url' => '@web/admins/users',
-                                'active' => $this->context->route == 'admin/getusers'
+        <?php
+        if (Yii::$app->user->identity->tipo_usuario == 1) {
+            ?>
+            <?=
+            Menu::widget(
+                [
+                    'options' => ['class' => 'sidebar-menu'],
+                    'items' => [
+                        [
+                            'label' => 'Menu',
+                            'options' => ['class' => 'header']
+                        ],
+                        [
+                            'label' => 'Dashboard',
+                            'icon' => 'fa fa-dashboard',
+                            'url' => '@web/admins',
+                            'active' => $this->context->route == 'admin/index'
+                        ],
+                        /*[
+                            'label' => 'Resumenes',
+                            'icon' => 'fa fa-table',
+                            'url' => '#',
+                            'active' => $classActiveR,
+                            'items' => [
+                                [
+                                    'label' => 'Resumen Direcciones',
+                                    'icon' => 'fa fa-table',
+                                    'url' => '@web/admins/direcciones',
+                                    'active' => $this->context->route == 'admin/getprospectos'
+                                ],
+                                [
+                                    'label' => 'Resumen Usuarios',
+                                    'icon' => 'fa fa-table',
+                                    'url' => '@web/admins/users',
+                                    'active' => $this->context->route == 'admin/getusers'
+                                ]
                             ]
-                        ]
-                    ],
-                    [
-                        'label' => 'Crear Usuario',
-                        'icon' => 'fa fa-plus',
-                        'url' => '@web/admins/createuser',
-                        'active' => $this->context->route == 'admin/createuser',
-                    ],
-                    [
+                        ],*/
+                        [
+                            'label' => 'Crear Usuario',
+                            'icon' => 'fa fa-plus',
+                            'url' => '@web/admins/createuser',
+                            'active' => $this->context->route == 'admin/createuser',
+                        ],
+                        [
 
-                    ],
-                    [
-                        'label' => 'Cargar Datos',
-                        'icon' => 'fa fa-file-excel-o',
-                        'url' => '#',
-                        'active' => $classActiveB,
-                        'items' => [
-                            [
-                                'label' => 'Cargar Bases',
-                                'icon' => 'fa fa-database',
-                                'url' => '@web/admins/uploadventas',
-                                'active' => $this->context->route == 'admin/uploadventas'
-                            ],
-                            [
-                                'label' => 'Cargar Direcciones',
-                                'icon' => 'fa fa-database',
-                                'url' => '@web/admins/uploadprospectos',
-                                'active' => $this->context->route == 'admin/uploadprospectos'
+                        ],
+                        [
+                            'label' => 'Cargar Datos',
+                            'icon' => 'fa fa-file-excel-o',
+                            'url' => '#',
+                            'active' => $classActiveB,
+                            'items' => [
+                                [
+                                    'label' => 'Cargar Bases',
+                                    'icon' => 'fa fa-database',
+                                    'url' => '@web/admins/uploadventas',
+                                    'active' => $this->context->route == 'admin/uploadventas'
+                                ],
+                                [
+                                    'label' => 'Cargar Direcciones',
+                                    'icon' => 'fa fa-database',
+                                    'url' => '@web/admins/uploadprospectos',
+                                    'active' => $this->context->route == 'admin/uploadprospectos'
+                                ]
                             ]
                         ]
-                    ]
-                ],
-            ]
-        )
+                    ],
+                ]
+            );
+            ?>
+            <?php
+        }else{
+            ?>
+            <?=
+            Menu::widget(
+                [
+                    'options' => ['class' => 'sidebar-menu'],
+                    'items' => [
+                        [
+                            'label' => 'Menu',
+                            'options' => ['class' => 'header']
+                        ],
+                        [
+                            'label' => 'Dashboard',
+                            'icon' => 'fa fa-dashboard',
+                            'url' => '@web/admins',
+                            'active' => $this->context->route == 'admin/index'
+                        ],
+                        /*[
+                            'label' => 'Resumenes',
+                            'icon' => 'fa fa-table',
+                            'url' => '#',
+                            'active' => $classActiveR,
+                            'items' => [
+                                [
+                                    'label' => 'Resumen Direcciones',
+                                    'icon' => 'fa fa-table',
+                                    'url' => '@web/admins/direcciones',
+                                    'active' => $this->context->route == 'admin/getprospectos'
+                                ],
+                                [
+                                    'label' => 'Resumen Usuarios',
+                                    'icon' => 'fa fa-table',
+                                    'url' => '@web/admins/users',
+                                    'active' => $this->context->route == 'admin/getusers'
+                                ]
+                            ]
+                        ],*/
+                        [
+                            'label' => 'Crear Usuario',
+                            'icon' => 'fa fa-plus',
+                            'url' => '@web/admins/createuser',
+                            'active' => $this->context->route == 'admin/createuser',
+                        ],
+                        [
+
+                        ],
+                        [
+                            'label' => 'Cargar Datos',
+                            'icon' => 'fa fa-file-excel-o',
+                            'url' => '#',
+                            'active' => $classActiveB,
+                            'items' => [
+                                [
+                                    'label' => 'Cargar Direcciones',
+                                    'icon' => 'fa fa-database',
+                                    'url' => '@web/admins/uploadprospectos',
+                                    'active' => $this->context->route == 'admin/uploadprospectos'
+                                ]
+                            ]
+                        ]
+                    ],
+                ]
+            );
+            ?>
+        <?php
+        }
         ?>
 
     </section>

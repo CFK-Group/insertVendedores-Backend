@@ -87,7 +87,7 @@ $series = $series . "]";
 
 
             <div class="row">
-                <div class="col-md-4 col-sm-6 col-xs-12 col-md-offset-2">
+                <div class="col-md-4 col-sm-6 col-xs-12">
                     <div class="info-box">
                         <span class="info-box-icon"><i class="glyphicon glyphicon-cloud-upload"></i></span>
 
@@ -107,6 +107,19 @@ $series = $series . "]";
                         <div class="info-box-content">
                             <span class="info-box-text info-box-text-small">Total ventas en INS</span>
                             <span class="info-box-number" id="vINS"> -- </span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="info-box">
+                        <span class="info-box-icon"><i class="glyphicon glyphicon-cloud-upload"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text info-box-text-small">Prospectos con Mail</span>
+                            <span class="info-box-number" id="pmail"> -- </span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
@@ -208,9 +221,10 @@ if ($usuario->tipo_usuario == 1) {
                             <th>Total prospectos creados</th>
                             <th>Total ventas instaladas</th>
                             <th>Total ventas en INS</th>
+                            <th>Prospectos con Mail</th>
                         </tr>
                         <tr>
-                            <td class="table-spinner" colspan="6">
+                            <td class="table-spinner" colspan="7">
                                 Sin Calcular
                             </td>
                         </tr>
@@ -444,6 +458,7 @@ $this->registerJS("
                 $('#prospectosCreados').text(data.prospectosCreados);
                 $('#vInstaladas').text(data.ventasTerminadas);
                 $('#vINS').text(data.ventasEnInstalacion);
+                $('#pmail').text(data.prospectosConMail);
                 var tr;
                 $('.generated').remove();
                 $('.table-spinner').remove();
@@ -455,8 +470,9 @@ $this->registerJS("
                         tr.append(\"<td style='text-align: center' class='generated'>\" + data.dataVendedores[vendedor].direccionesCargadas + \"</td>\");
                         tr.append(\"<td style='text-align: center' class='generated'>\" + data.dataVendedores[vendedor].prospectosConAccionComercial + \"</td>\");
                         tr.append(\"<td style='text-align: center' class='generated'>\" + data.dataVendedores[vendedor].prospectosCreados + \"</td>\");
-                        tr.append(\"<td style='text-align: center' class='generated'>\" + data.dataVendedores[vendedor].ventasEnInstalacion + \"</td>\");
                         tr.append(\"<td style='text-align: center' class='generated'>\" + data.dataVendedores[vendedor].ventasTerminadas + \"</td>\");
+                        tr.append(\"<td style='text-align: center' class='generated'>\" + data.dataVendedores[vendedor].ventasEnInstalacion + \"</td>\");
+                        tr.append(\"<td style='text-align: center' class='generated'>\" + data.dataVendedores[vendedor].prospectosConMail + \"</td>\");
                         $('#resumen').append(tr);
                     }
                 }else{
