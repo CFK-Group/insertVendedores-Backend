@@ -376,7 +376,8 @@ class VendedorController extends \yii\rest\ActiveController
 			$this->setHeader(400);
 			return false;
 		}
-		$prospectos = $user->getProspectos()->all();
+		$startDate = 1527811200;
+		$prospectos = $user->getProspectos()->where(['>=','create_time', $startDate])->all();
 		if(count($prospectos)>0){
             foreach ($prospectos as $prospecto ){
                 $prospecto->accion_comercial = $prospecto->getAccionesComerciales();
