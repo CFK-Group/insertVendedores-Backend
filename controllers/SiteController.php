@@ -71,20 +71,21 @@ class SiteController extends Controller
     public function actionLogin()
     {
         $this->layout = 'login';
-
-        //si la primera vez el usuario ya existe, redirige al index del admin
-        if (!Yii::$app->user->isGuest) {
-        	Utils::log("No es guest, lo mando a admins");
-            return $this->redirect(Yii::getAlias('@web').'/admins');
-        }
-
         $model = new LoginForm();
-        //si no existe va a hacer el proceso de login
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-        	Utils::log("Auth ok, lo mando a admins");
-            return $this->redirect(Yii::getAlias('@web').'/admins');
-        }
+        if(\Yii::$app->user->getIdentity()->estado == 0) {
 
+            //si la primera vez el usuario ya existe, redirige al index del admin
+            if (!Yii::$app->user->isGuest) {
+                Utils::log("No es guest, lo mando a admins");
+                return $this->redirect(Yii::getAlias('@web') . '/admins');
+            }
+
+            //si no existe va a hacer el proceso de login
+            if ($model->load(Yii::$app->request->post()) && $model->login()) {
+                Utils::log("Auth ok, lo mando a admins");
+                return $this->redirect(Yii::getAlias('@web') . '/admins');
+            }
+        }
         //si falla el login, volverá a cargar el login
         Utils::log("Mostrando login...");
         return $this->render('login', [

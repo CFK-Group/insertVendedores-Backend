@@ -6,6 +6,7 @@ use app\commands\Utils;
 use app\models\AccionComercial;
 use app\models\AccionVendedor;
 use app\models\Apertura;
+use app\models\LoginForm;
 use app\models\Prospecto;
 use app\models\SupervisorSupervisa;
 use app\models\Vendedor;
@@ -955,20 +956,27 @@ class AdminController extends Controller
     //OK
     public function actionIndex()
     {
-        if (!\Yii::$app->user->isGuest) {
-            Utils::log(" TENGO SESION");
-            if (\Yii::$app->user->getIdentity()->tipo_usuario == 4) {
-                return $this->redirect('chats');
-            } else if (\Yii::$app->user->getIdentity()->tipo_usuario == 1) {
-                $data = AccionVendedor::getAccionesPorDia();
-                return $this->render('index', ['data' => $data]);
+        if(\Yii::$app->user->getIdentity()->estado == 0) {
+
+            if (!\Yii::$app->user->isGuest) {
+                Utils::log(" TENGO SESION");
+                if (\Yii::$app->user->getIdentity()->tipo_usuario == 4) {
+                    return $this->redirect('chats');
+                } else if (\Yii::$app->user->getIdentity()->tipo_usuario == 1) {
+                    $data = AccionVendedor::getAccionesPorDia();
+                    return $this->render('index', ['data' => $data]);
+                }
+            } else {
+                Utils::log("GUEST");
+                return $this->redirect('sites/login');
             }
-        } else {
-            Utils::log("GUEST");
+
+            return $this->render('index');
+        }else{
+            $model = new LoginForm();
             return $this->redirect('sites/login');
         }
 
-        return $this->render('index');
     }
 
     //RENDERIZA LA VISTA DE LAS DIRECCIONES
